@@ -1,14 +1,93 @@
-# k8sServiceHost is set by the Makefile to <cluster>-control-plane.
-kubeProxyReplacement: true
+# Cilium 1.20.3 (pinned in versions.mk). k8sServiceHost is set by the Makefile
+# to <cluster>-control-plane; k8sServicePort below is the kind API server port.
+#
+# Tetragon now installs AS PART OF this release (tetragon.enabled=true), not as
+# its own `helm install cilium/tetragon`. deploy/platform/tetragon-values.yaml
+# is gone — its two settings (hostProcPath, enableProcessCred/Ns) live under
+# the tetragon: key below instead, so there is one platform install, not two
+# competing DaemonSets both named "tetragon" in kube-system.
+#
+# Prerequisites this values file assumes are already met before `make cilium`:
+#   - gatewayAPI.enabled requires the Gateway API CRDs installed first, or the
+#     cilium-operator crash-loops on missing CRDs. The Makefile's `cilium`
+#     target applies them (pinned via GATEWAY_API_VERSION in versions.mk)
+#     before the helm upgrade — don't skip that step if running this by hand.
+#   - bpf.datapathMode=netkit needs a kernel new enough to support netkit
+#     devices. Confirm on your actual kind node kernel before rehearsals;
+#     fall back to the default veth datapath (drop bpf.datapathMode) if not.
+#   - authentication.mutual.spire.install.enabled installs an in-cluster SPIRE
+#     server/agent via this same chart — nothing extra to stand up yourself.
+
 k8sServicePort: 6443
+
 ipam:
   mode: kubernetes
+kubeProxyReplacement: true
+routingMode: tunnel
+autoDirectNodeRoutes: true
+installNoConntrackIptablesRules: true
+
+bpf:
+  datapathMode: netkit
+  masquerade: true
+
 l7Proxy: true
+
+gatewayAPI:
+  enabled: true
+
+ingressController:
+  enabled: true
+  default: true
+  service:
+    type: NodePort
+  loadbalancerMode: shared
+
+nodePort:
+  enabled: true
+
+bgpControlPlane:
+  enabled: true
+
+authentication:
+  mutual:
+    spire:
+      enabled: true
+      install:
+        enabled: true
+
+prometheus:
+  enabled: true
+
 operator:
   replicas: 1
+  prometheus:
+    enabled: true
+
 hubble:
   enabled: true
   relay:
     enabled: true
   ui:
     enabled: true
+  metrics:
+    enabled:
+      - dns
+      - drop
+      - tcp
+      - flow
+      - port-distribution
+      - icmp
+      - http
+
+tetragon:
+  enabled: true
+  hostProcPath: /proc         # needed on kind
+  enableProcessCred: true
+  enableProcessNs: true
+  export:
+    hubble:
+      enabled: true
+
+crds:
+  install: true

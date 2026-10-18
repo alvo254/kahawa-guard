@@ -1,11 +1,24 @@
 # One control plane, two workers. kind's default CNI and kube-proxy are both
 # disabled so Cilium can take over the network entirely.
+#
+# containerdConfigPatches: a pull-through mirror for a local registry at
+# localhost:5000, backed by a container named "kind-registry" on the same
+# Docker network as the kind nodes. Create one before relying on this, e.g.:
+#   docker run -d --restart=always -p 5000:5000 --name kind-registry \
+#     --network kind registry:2
+# (standard kind local-registry pattern; see kind's own docs for the full
+# script, including wiring it into the "kind" network if it already exists
+# under a different name).
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 name: kahawa
 networking:
   disableDefaultCNI: true
   kubeProxyMode: none
+containerdConfigPatches:
+  - |-
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
+      endpoint = ["http://kind-registry:5000"]
 nodes:
   - role: control-plane
   - role: worker
