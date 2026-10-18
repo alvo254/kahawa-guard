@@ -45,6 +45,8 @@ REFUSAL = {
     "expert_guard_in": "I cannot help with that request.",
     "budget": "You have reached today's limit for this service. Please try again tomorrow, "
               "or visit the cooperative office.",
+    "model_unavailable": "I can't reach the assistant model right now. Please try again in "
+                          "a moment.",
 }
 
 
@@ -157,50 +159,57 @@ async def chat(req: ChatRequest) -> ChatResponse:
     except Exception as exc:                                # noqa: BLE001
         log.warning("MCP refresh failed: %s", exc)
 
-    # 5 model call
-    result = await model.answer(req.message, retrieved, ident.phone_hash)
+    # 5 model call, through 8 (registry retry also calls the model) — one
+    # catch here for an unreachable provider, rather than three.
+    try:
+        result = await model.answer(req.message, retrieved, ident.phone_hash)
 
-    # 6 tool gate (L4)
-    decisions: list[tool_gate.ToolDecision] = []
-    if result.tool_calls:
-        decisions = await tool_gate.run_calls(result.tool_calls, ident.phone_hash)
-        tool_messages: list[dict[str, Any]] = []
-        for d in decisions:
-            if d.decision == "allow" and d.result is not None:
-                payload = d.result.get("content", json.dumps(d.result))
-            elif d.decision == "park":
-                payload = (f"NOT EXECUTED. This action is parked and needs "
-                           f"{', '.join(d.requires)} before it can run. Tell the member "
-                           f"how to confirm it; do not claim it is done.")
-            else:
-                payload = f"NOT EXECUTED. {d.reason}"
-            tool_messages.append({"role": "system",
-                                  "content": f"Result of {d.call.name}: {payload}"})
-        # Second pass so the reply reflects what actually happened, not what the
-        # model hoped would happen.
-        result = await model.answer(req.message, retrieved, ident.phone_hash,
-                                    extra_messages=tool_messages, with_tools=False)
+        # 6 tool gate (L4)
+        decisions: list[tool_gate.ToolDecision] = []
+        if result.tool_calls:
+            decisions = await tool_gate.run_calls(result.tool_calls, ident.phone_hash)
+            tool_messages: list[dict[str, Any]] = []
+            for d in decisions:
+                if d.decision == "allow" and d.result is not None:
+                    payload = d.result.get("content", json.dumps(d.result))
+                elif d.decision == "park":
+                    payload = (f"NOT EXECUTED. This action is parked and needs "
+                               f"{', '.join(d.requires)} before it can run. Tell the member "
+                               f"how to confirm it; do not claim it is done.")
+                else:
+                    payload = f"NOT EXECUTED. {d.reason}"
+                tool_messages.append({"role": "system",
+                                      "content": f"Result of {d.call.name}: {payload}"})
+            # Second pass so the reply reflects what actually happened, not what
+            # the model hoped would happen.
+            result = await model.answer(req.message, retrieved, ident.phone_hash,
+                                        extra_messages=tool_messages, with_tools=False)
 
-    reply = result.text or ""
+        reply = result.text or ""
 
-    # 7 expert guard on the draft reply (L2)
-    l2_out = await expert_guard.run(reply, "output_questions", ident.phone_hash)
+        # 7 expert guard on the draft reply (L2)
+        l2_out = await expert_guard.run(reply, "output_questions", ident.phone_hash)
 
-    # 8 registry check (L3): one constrained retry, then the safe template
-    checked = await reg_check.check_reply(reply, ident.phone_hash)
-    if not checked.ok:
-        retry = await model.retry_constrained(req.message, retrieved,
-                                              checked.problems, ident.phone_hash)
-        reply = retry.text or ""
-        second = await reg_check.check_reply(reply, ident.phone_hash)
-        if not second.ok:
+        # 8 registry check (L3): one constrained retry, then the safe template
+        checked = await reg_check.check_reply(reply, ident.phone_hash)
+        if not checked.ok:
+            retry = await model.retry_constrained(req.message, retrieved,
+                                                  checked.problems, ident.phone_hash)
+            reply = retry.text or ""
+            second = await reg_check.check_reply(reply, ident.phone_hash)
+            if not second.ok:
+                reply = checked.safe_template or REFUSAL["input_guard"]
+                bus.publish(Verdict(layer="registry", decision="refuse",
+                                    detail="retry failed too; sent the safe template",
+                                    pack=registry.active_name, profile=settings.profile,
+                                    phone_hash=ident.phone_hash))
+        elif l2_out.blocked:
             reply = checked.safe_template or REFUSAL["input_guard"]
-            bus.publish(Verdict(layer="registry", decision="refuse",
-                                detail="retry failed too; sent the safe template",
-                                pack=registry.active_name, profile=settings.profile,
-                                phone_hash=ident.phone_hash))
-    elif l2_out.blocked:
-        reply = checked.safe_template or REFUSAL["input_guard"]
+    except model.ModelUnavailable:
+        verdicts = harvest()
+        await audit.record_all(collected)
+        return ChatResponse(reply=REFUSAL["model_unavailable"], verdicts=verdicts,
+                            blocked_by="model_unavailable")
 
     # Budget accounting
     used = int((result.usage or {}).get("total_tokens", 0) or 0)

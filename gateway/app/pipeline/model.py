@@ -22,6 +22,14 @@ from .retrieve import Retrieved
 log = logging.getLogger(__name__)
 
 
+class ModelUnavailable(Exception):
+    """The configured provider could not be reached at all — a network or DNS
+    failure, not a guard decision. Raised instead of letting the underlying
+    httpx/provider exception surface as a bare 500 with nothing in the
+    verdict feed to show what happened; the gateway's /api/chat handler
+    catches this once, centrally, and returns a clear, friendly refusal."""
+
+
 def build_messages(question: str, retrieved: Retrieved, extra: list[dict[str, Any]] | None = None):
     system = packs.active.prompt or (
         "You are a cooperative assistant. Be short, accurate and cite your source."
@@ -53,13 +61,24 @@ async def answer(
     schemas = manager.tool_schemas() if with_tools else []
     messages = build_messages(question, retrieved, extra_messages)
 
-    result = await provider().chat(
-        messages,
-        tools=schemas or None,
-        # The inline guardrail is declared on the request itself. It is an input
-        # check, so it can never see the reply.
-        guardrail=packs.on("input_guard") and settings.llm_provider == "mistral",
-    )
+    try:
+        result = await provider().chat(
+            messages,
+            tools=schemas or None,
+            # The inline guardrail is declared on the request itself. It is an
+            # input check, so it can never see the reply.
+            guardrail=packs.on("input_guard") and settings.llm_provider == "mistral",
+        )
+    except ModelUnavailable:
+        raise
+    except Exception as exc:                                 # noqa: BLE001
+        log.warning("model call failed: %s", exc)
+        bus.publish(Verdict(
+            layer="model", decision="refuse",
+            detail=f"{settings.llm_provider} unreachable: {exc}",
+            pack=packs.active_name, profile=settings.profile, phone_hash=phone_hash,
+        ))
+        raise ModelUnavailable(str(exc)) from exc
 
     bus.publish(Verdict(
         layer="model",
