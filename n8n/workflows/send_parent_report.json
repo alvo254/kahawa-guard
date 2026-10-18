@@ -7,10 +7,13 @@
         "toolDescription": "Send a report about a specific child to a guardian. Education pack only. The gateway parks this tool until a guardian PIN is confirmed; this workflow still checks guardian_confirmed itself as a second line, because a workflow that trusts its caller completely is exactly the EscapeRoute lesson applied to n8n instead of a filesystem server.",
         "parametersSchema": {
           "type": "object",
-          "required": ["child_id", "guardian_phone_hash", "guardian_confirmed"],
+          "required": ["child_id", "guardian_phone", "guardian_confirmed"],
           "properties": {
             "child_id": { "type": "string" },
-            "guardian_phone_hash": { "type": "string" },
+            "guardian_phone": {
+              "type": "string",
+              "description": "E.164 number to send the report to. Supplied directly by the caller, not looked up from a hash — unlike the coffee pack's members table, education is a thin stub with no guardian-contact table of its own yet."
+            },
             "guardian_confirmed": { "type": "boolean" }
           }
         }
@@ -49,6 +52,7 @@
       },
       "id": "44444444-4444-4444-8444-444444444403",
       "name": "Fetch report",
+      "notes": "child_reports has no backing table yet — education is a thin stub pack per the technical guide. Add the table (and its own seed data) before relying on this node.",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [680, 220],
@@ -56,17 +60,39 @@
     },
     {
       "parameters": {
-        "resource": "sms",
-        "operation": "send",
-        "to": "={{ $('MCP Server Trigger').item.json.guardian_phone_hash }}",
-        "message": "=Report for {{ $json.name }}, term {{ $json.term }}: attendance {{ $json.attendance_pct }}%. {{ $json.marks_summary }}"
+        "method": "POST",
+        "url": "https://api.sandbox.africastalking.com/version1/messaging",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Accept", "value": "application/json" },
+            { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
+          ]
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "username", "value": "sandbox" },
+            { "name": "to", "value": "={{ $('MCP Server Trigger').item.json.guardian_phone }}" },
+            {
+              "name": "message",
+              "value": "=Report for {{ $json.name }}, term {{ $json.term }}: attendance {{ $json.attendance_pct }}%. {{ $json.marks_summary }}"
+            }
+          ]
+        }
       },
       "id": "44444444-4444-4444-8444-444444444404",
       "name": "Send report by SMS",
-      "type": "n8n-nodes-base.africasTalking",
-      "typeVersion": 1,
+      "notes": "Africa's Talking has no dedicated n8n node — this calls its REST API directly. The apiKey credential (name 'apiKey', value from AT_API_KEY) is created once in n8n's own Credentials UI; it is never exported with the workflow.",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [900, 220],
-      "credentials": { "africasTalkingApi": { "id": "kahawa-at", "name": "Africa's Talking (sandbox)" } }
+      "credentials": {
+        "httpHeaderAuth": { "id": "kahawa-at-header", "name": "Africa's Talking apiKey header" }
+      }
     },
     {
       "parameters": {

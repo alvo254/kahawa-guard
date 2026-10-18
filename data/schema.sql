@@ -14,7 +14,15 @@ CREATE EXTENSION IF NOT EXISTS vector;
 CREATE TABLE IF NOT EXISTS members (
   id SERIAL PRIMARY KEY,
   grower_code TEXT UNIQUE NOT NULL,
+  -- phone_hash is what the gateway's own pipeline and audit trail use (a
+  -- one-way SHA256 — see gateway/app/pipeline/identify.py). It can never be
+  -- turned back into a dialable number, by design.
   phone_hash TEXT NOT NULL,
+  -- phone_e164 is the real (here: invented sandbox) number n8n's SMS
+  -- workflows actually send to. Only n8n's Postgres queries read this column;
+  -- the gateway itself never selects it, so the model and the audit log never
+  -- see a real number, only its hash.
+  phone_e164 TEXT NOT NULL,
   coop_id INT NOT NULL,
   payout_account_ref TEXT NOT NULL
 );

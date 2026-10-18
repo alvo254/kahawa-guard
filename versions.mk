@@ -2,9 +2,7 @@
 # An empty value means "the chart's latest release", which is fine while building
 # but MUST be pinned before rehearsals. Test the full stack a week before the session.
 CILIUM_VERSION     ?= 1.20.3
-# Tetragon is installed AS PART OF the Cilium release now (tetragon.enabled=true
-# in cilium-values.yaml), not as its own helm release — there is no separate
-# TETRAGON_VERSION to pin; it tracks whatever Tetragon chart Cilium 1.20.3 bundles.
+TETRAGON_VERSION   ?=
 GATEWAY_API_VERSION ?= v1.3.0
 KYVERNO_VERSION    ?=
 VAULT_VERSION      ?=

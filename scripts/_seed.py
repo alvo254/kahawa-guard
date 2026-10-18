@@ -44,8 +44,9 @@ def emit_members() -> list[str]:
         for row in csv.DictReader(f):
             phash = hash_phone(row["phone"])
             out.append(
-                "INSERT INTO members (grower_code, phone_hash, coop_id, payout_account_ref) "
+                "INSERT INTO members (grower_code, phone_hash, phone_e164, coop_id, payout_account_ref) "
                 f"VALUES ({sql_str(row['grower_code'])}, {sql_str(phash)}, "
+                f"{sql_str(row['phone'].strip())}, "
                 f"{int(row['coop_id'])}, {sql_str(row['payout_account_ref'])});"
             )
     return out

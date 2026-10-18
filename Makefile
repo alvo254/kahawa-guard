@@ -17,7 +17,7 @@ ver = $(if $(1),--version $(1),)
 
 .DEFAULT_GOAL := help
 
-.PHONY: help prereqs up down cluster platform cilium kyverno secrets \
+.PHONY: help prereqs up down cluster platform cilium tetragon kyverno secrets \
 	        images load stage deploy naked harden swap reset ui hubble inspector events \
 	        ollama mcp-forward mcp-list mcp-tui mcp-test mcp-pin mcp-check \
 	        scene1 scene2 scene3 scene3b scene3c scene4 prove-admission redteam
@@ -38,9 +38,9 @@ down: ## Delete the cluster
 cluster: ## Create the kind cluster without a default CNI or kube-proxy
 	kind create cluster --name $(CLUSTER) --config deploy/kind/kind-config.yaml
 
-platform: cilium kyverno secrets ## Install the platform layer
+platform: cilium tetragon kyverno secrets ## Install the platform layer
 
-cilium: ## Install Cilium with Hubble and Tetragon (Tetragon ships as part of this release)
+cilium: ## Install Cilium with Hubble
 	kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/$(GATEWAY_API_VERSION)/standard-install.yaml
 	helm repo add cilium https://helm.cilium.io >/dev/null 2>&1 || true
 	helm repo update >/dev/null
@@ -48,6 +48,11 @@ cilium: ## Install Cilium with Hubble and Tetragon (Tetragon ships as part of th
 	  -n kube-system -f deploy/platform/cilium-values.yaml \
 	  --set k8sServiceHost=$(CLUSTER)-control-plane
 	cilium status --wait
+
+tetragon: ## Install Tetragon (its own release — not bundled with Cilium)
+	helm repo add cilium https://helm.cilium.io >/dev/null 2>&1 || true
+	helm upgrade --install tetragon cilium/tetragon $(call ver,$(TETRAGON_VERSION)) \
+	  -n kube-system -f deploy/platform/tetragon-values.yaml
 	kubectl rollout status -n kube-system ds/tetragon
 
 kyverno: ## Install Kyverno (policies are applied by make harden)

@@ -23,11 +23,12 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT phone_hash FROM members WHERE grower_code = $1;",
+        "query": "SELECT phone_e164 FROM members WHERE grower_code = $1;",
         "options": { "queryReplacement": "={{ [$json.grower_code] }}" }
       },
       "id": "33333333-3333-4333-8333-333333333302",
       "name": "Look up member",
+      "notes": "phone_e164, not phone_hash — the hash is a one-way SHA256 and cannot be dialed. Only this workflow's Postgres query touches phone_e164; the gateway itself never selects it.",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
       "position": [460, 300],
@@ -35,17 +36,36 @@
     },
     {
       "parameters": {
-        "resource": "sms",
-        "operation": "send",
-        "to": "={{ $json.phone_hash }}",
-        "message": "={{ $('MCP Server Trigger').item.json.message }}"
+        "method": "POST",
+        "url": "https://api.sandbox.africastalking.com/version1/messaging",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Accept", "value": "application/json" },
+            { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
+          ]
+        },
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "username", "value": "sandbox" },
+            { "name": "to", "value": "={{ $json.phone_e164 }}" },
+            { "name": "message", "value": "={{ $('MCP Server Trigger').item.json.message }}" }
+          ]
+        }
       },
       "id": "33333333-3333-4333-8333-333333333303",
       "name": "Send SMS",
-      "type": "n8n-nodes-base.africasTalking",
-      "typeVersion": 1,
+      "notes": "Africa's Talking has no dedicated n8n node — this calls its REST API directly. The apiKey credential (name 'apiKey', value from AT_API_KEY) is created once in n8n's own Credentials UI; it is never exported with the workflow.",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [680, 300],
-      "credentials": { "africasTalkingApi": { "id": "kahawa-at", "name": "Africa's Talking (sandbox)" } }
+      "credentials": {
+        "httpHeaderAuth": { "id": "kahawa-at-header", "name": "Africa's Talking apiKey header" }
+      }
     }
   ],
   "connections": {

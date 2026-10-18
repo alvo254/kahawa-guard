@@ -1,11 +1,13 @@
 # Cilium 1.20.3 (pinned in versions.mk). k8sServiceHost is set by the Makefile
 # to <cluster>-control-plane; k8sServicePort below is the kind API server port.
 #
-# Tetragon now installs AS PART OF this release (tetragon.enabled=true), not as
-# its own `helm install cilium/tetragon`. deploy/platform/tetragon-values.yaml
-# is gone — its two settings (hostProcPath, enableProcessCred/Ns) live under
-# the tetragon: key below instead, so there is one platform install, not two
-# competing DaemonSets both named "tetragon" in kube-system.
+# Tetragon is NOT bundled with this chart — checked the real chart directly:
+# no charts/tetragon subdirectory, no dependency in Chart.yaml, no "tetragon"
+# key anywhere in templates/ or values.yaml. A tetragon: block here is simply
+# ignored by Helm, not an error, which is exactly how that mistake went
+# unnoticed until `kubectl get pods -A` showed no tetragon DaemonSet at all.
+# Tetragon installs as its OWN separate release — see the `tetragon` Makefile
+# target and deploy/platform/tetragon-values.yaml.
 #
 # Prerequisites this values file assumes are already met before `make cilium`:
 #   - gatewayAPI.enabled requires the Gateway API CRDs installed first, or the
@@ -15,8 +17,16 @@
 #   - bpf.datapathMode=netkit needs a kernel new enough to support netkit
 #     devices. Confirm on your actual kind node kernel before rehearsals;
 #     fall back to the default veth datapath (drop bpf.datapathMode) if not.
-#   - authentication.mutual.spire.install.enabled installs an in-cluster SPIRE
-#     server/agent via this same chart — nothing extra to stand up yourself.
+#
+# NOT present: authentication.mutual.spire.*. It was carried over from an
+# original pasted --set list, unused by anything in deploy/policies/cilium/,
+# and its bundled spire-server never stabilizes past kubelet's liveness probe
+# under this chart version — the probe's timing is hardcoded in
+# templates/spire/server/statefulset.yaml with no Helm-values override
+# available, and the real failure (a near-instant graceful shutdown well
+# before the probe even runs its first check) is inside spire-server's own
+# startup logic, not anything tunable from here. Dropped rather than chased
+# further, given nothing in this repo actually uses SPIRE-based mutual auth.
 
 k8sServicePort: 6443
 
@@ -24,8 +34,18 @@ ipam:
   mode: kubernetes
 kubeProxyReplacement: true
 routingMode: tunnel
-autoDirectNodeRoutes: true
-installNoConntrackIptablesRules: true
+# autoDirectNodeRoutes is NOT set here — it's a native-routing feature and is
+# fatal in combination with routingMode: tunnel ("auto-direct-node-routes
+# cannot be used with tunneling"). Tunnel mode handles inter-node routing on
+# its own via the VXLAN/Geneve overlay; this setting would only make sense
+# under routingMode: native.
+#
+# installNoConntrackIptablesRules is NOT set here either, same reason: it's
+# also fatal under routingMode: tunnel ("install-no-conntrack-iptables-rules
+# requires the agent to run in direct routing mode"). Tunnel mode still needs
+# Cilium's default iptables conntrack rules for correct tracking around the
+# VXLAN interface; skipping them is only safe in native mode, where eBPF
+# handles the equivalent at the datapath level instead.
 
 bpf:
   datapathMode: netkit
@@ -48,13 +68,6 @@ nodePort:
 
 bgpControlPlane:
   enabled: true
-
-authentication:
-  mutual:
-    spire:
-      enabled: true
-      install:
-        enabled: true
 
 prometheus:
   enabled: true
@@ -79,15 +92,6 @@ hubble:
       - port-distribution
       - icmp
       - http
-
-tetragon:
-  enabled: true
-  hostProcPath: /proc         # needed on kind
-  enableProcessCred: true
-  enableProcessNs: true
-  export:
-    hubble:
-      enabled: true
 
 crds:
   install: true
