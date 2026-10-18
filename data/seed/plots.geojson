@@ -1,0 +1,31 @@
+{
+  "type": "FeatureCollection",
+  "name": "plots",
+  "comment": "Invented plots. KG-0003 sits inside the 2020 forest fixture (Scene 4, laundered plot). KG-0004 overlaps KG-0001 (duplicate claim). Everything else is clean.",
+  "features": [
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0001", "gps_accuracy_m": 6.0, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0500,-0.4500],[37.0550,-0.4500],[37.0550,-0.4460],[37.0500,-0.4460],[37.0500,-0.4500]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0002", "gps_accuracy_m": 8.5, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0600,-0.4520],[37.0650,-0.4520],[37.0650,-0.4480],[37.0600,-0.4480],[37.0600,-0.4520]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0003", "gps_accuracy_m": 42.0, "mock_location": true, "note": "inside forest_2020" },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0050,-0.3950],[37.0120,-0.3950],[37.0120,-0.3900],[37.0050,-0.3900],[37.0050,-0.3950]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0004", "gps_accuracy_m": 11.0, "mock_location": false, "note": "overlaps KG-0001" },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0530,-0.4490],[37.0580,-0.4490],[37.0580,-0.4450],[37.0530,-0.4450],[37.0530,-0.4490]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0005", "gps_accuracy_m": 5.0, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0700,-0.4600],[37.0740,-0.4600],[37.0740,-0.4570],[37.0700,-0.4570],[37.0700,-0.4600]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0006", "gps_accuracy_m": 7.5, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0760,-0.4620],[37.0800,-0.4620],[37.0800,-0.4590],[37.0760,-0.4590],[37.0760,-0.4620]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0007", "gps_accuracy_m": 9.0, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0820,-0.4650],[37.0860,-0.4650],[37.0860,-0.4620],[37.0820,-0.4620],[37.0820,-0.4650]]] } },
+    { "type": "Feature",
+      "properties": { "grower_code": "KG-0008", "gps_accuracy_m": 6.5, "mock_location": false },
+      "geometry": { "type": "Polygon", "coordinates": [[[37.0880,-0.4680],[37.0920,-0.4680],[37.0920,-0.4650],[37.0880,-0.4650],[37.0880,-0.4680]]] } }
+  ]
+}

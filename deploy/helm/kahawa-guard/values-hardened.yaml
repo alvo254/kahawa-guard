@@ -1,0 +1,35 @@
+# HARDENED. Same images, same code. Guards on, least privilege, policies applied
+# alongside by `make harden` (Cilium, Tetragon, Kyverno).
+profile: hardened
+
+guards:
+  inputGuard: true
+  expertGuard: true
+  provenance: true
+  registry: true
+  toolGate: true
+  budgets: true
+
+security:
+  restricted: true                       # namespaces labelled enforce: restricted
+  automountServiceAccountToken: false    # one SA per workload, no token
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  adminTokenRequired: true
+  secretsFromVault: true                 # Vault + External Secrets, mounted as files
+
+expose:
+  type: ClusterIP                        # UI reached by port-forward
+
+resources:
+  enabled: true
+  quotas: true
+
+# The attacker namespace stays deployed: the point is that the same attack is now
+# dropped by Cilium and killed by Tetragon, not that the attacker went away.
+attacker:
+  enabled: true
+
+n8n:
+  nodesExclude: '["n8n-nodes-base.executeCommand","n8n-nodes-base.code"]'
+  requireMcpToken: true

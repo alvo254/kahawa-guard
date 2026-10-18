@@ -1,0 +1,20 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: allowed-registries
+spec:
+  background: false
+  rules:
+    - name: only-known-registries
+      match:
+        any:
+          - resources:
+              kinds: ["Pod"]
+              namespaces: ["kahawa-ui", "gateway", "tools", "n8n", "data"]
+      validate:
+        failureAction: Enforce
+        message: "Images must come from kahawa/ (locally built and kind-loaded) or docker.io/library."
+        pattern:
+          spec:
+            containers:
+              - image: "kahawa/* | docker.io/library/*"

@@ -1,0 +1,46 @@
+# n8n talks to Postgres and, if real SMS is enabled, to Africa's Talking. Nothing else.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: n8n-egress
+  namespace: n8n
+spec:
+  endpointSelector:
+    matchLabels:
+      app: n8n
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: data
+            app: postgres
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+    - toFQDNs:
+        - matchName: api.sandbox.africastalking.com
+        - matchName: api.africastalking.com
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: gateway
+            app: gateway
+      toPorts:
+        - ports:
+            - port: "5678"
+              protocol: TCP

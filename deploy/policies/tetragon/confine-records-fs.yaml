@@ -1,0 +1,34 @@
+# Scene 3c. The records-fs server is vulnerable by design: it decides for itself
+# which paths it may read (the EscapeRoute flaw class, CVE-2025-53109 and
+# CVE-2025-53110). This policy moves the boundary underneath it, into the kernel,
+# where the server's own bugs cannot reach it: the real file open is what gets
+# judged, not the path string the server chose to validate.
+#
+# TUNE THE ALLOWLIST against the exact records-fs image. It must cover the files
+# the process legitimately needs to run (interpreter, libraries) and nothing more:
+# a missing prefix kills the server on startup, an over-broad one defeats the point.
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: confine-records-fs
+spec:
+  podSelector:
+    matchLabels:
+      app: records-fs
+  kprobes:
+    - call: "security_file_open"
+      syscall: false
+      args:
+        - index: 0
+          type: "file"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "NotPrefix"       # anything NOT under an allowed prefix
+              values:
+                - "/srv/records/"
+                - "/usr/"                  # the server's own read-only runtime
+                - "/lib/"
+                - "/proc/"
+          matchActions:
+            - action: Sigkill

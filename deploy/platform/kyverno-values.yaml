@@ -1,0 +1,10 @@
+# Small single-replica install for the demo. Policies are applied by `make harden`,
+# not shipped with the chart, so the naked profile has no admission control at all.
+admissionController:
+  replicas: 1
+backgroundController:
+  enabled: true
+cleanupController:
+  enabled: false
+reportsController:
+  enabled: true

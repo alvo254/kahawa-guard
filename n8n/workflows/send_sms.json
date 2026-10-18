@@ -1,0 +1,64 @@
+{
+  "name": "send_sms",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "send-sms",
+        "toolDescription": "Send a short SMS to a member's registered phone number, for example an OTP or a payment notification. Capped by the pack's tool gate at one call per message.",
+        "parametersSchema": {
+          "type": "object",
+          "required": ["grower_code", "message"],
+          "properties": {
+            "grower_code": { "type": "string" },
+            "message": { "type": "string", "maxLength": 300 }
+          }
+        }
+      },
+      "id": "33333333-3333-4333-8333-333333333301",
+      "name": "MCP Server Trigger",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT phone_hash FROM members WHERE grower_code = $1;",
+        "options": { "queryReplacement": "={{ [$json.grower_code] }}" }
+      },
+      "id": "33333333-3333-4333-8333-333333333302",
+      "name": "Look up member",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [460, 300],
+      "credentials": { "postgres": { "id": "kahawa-postgres", "name": "Kahawa Postgres" } }
+    },
+    {
+      "parameters": {
+        "resource": "sms",
+        "operation": "send",
+        "to": "={{ $json.phone_hash }}",
+        "message": "={{ $('MCP Server Trigger').item.json.message }}"
+      },
+      "id": "33333333-3333-4333-8333-333333333303",
+      "name": "Send SMS",
+      "type": "n8n-nodes-base.africasTalking",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "credentials": { "africasTalkingApi": { "id": "kahawa-at", "name": "Africa's Talking (sandbox)" } }
+    }
+  ],
+  "connections": {
+    "MCP Server Trigger": {
+      "main": [[{ "node": "Look up member", "type": "main", "index": 0 }]]
+    },
+    "Look up member": {
+      "main": [[{ "node": "Send SMS", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "1",
+  "meta": { "templateCredsSetupCompleted": true }
+}

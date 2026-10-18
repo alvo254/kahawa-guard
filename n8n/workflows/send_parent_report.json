@@ -1,0 +1,102 @@
+{
+  "name": "send_parent_report",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "send-parent-report",
+        "toolDescription": "Send a report about a specific child to a guardian. Education pack only. The gateway parks this tool until a guardian PIN is confirmed; this workflow still checks guardian_confirmed itself as a second line, because a workflow that trusts its caller completely is exactly the EscapeRoute lesson applied to n8n instead of a filesystem server.",
+        "parametersSchema": {
+          "type": "object",
+          "required": ["child_id", "guardian_phone_hash", "guardian_confirmed"],
+          "properties": {
+            "child_id": { "type": "string" },
+            "guardian_phone_hash": { "type": "string" },
+            "guardian_confirmed": { "type": "boolean" }
+          }
+        }
+      },
+      "id": "44444444-4444-4444-8444-444444444401",
+      "name": "MCP Server Trigger",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.guardian_confirmed }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "44444444-4444-4444-8444-444444444402",
+      "name": "Guardian confirmed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT name, term, attendance_pct, marks_summary FROM child_reports WHERE child_id = $1;",
+        "options": { "queryReplacement": "={{ [$json.child_id] }}" }
+      },
+      "id": "44444444-4444-4444-8444-444444444403",
+      "name": "Fetch report",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [680, 220],
+      "credentials": { "postgres": { "id": "kahawa-postgres", "name": "Kahawa Postgres" } }
+    },
+    {
+      "parameters": {
+        "resource": "sms",
+        "operation": "send",
+        "to": "={{ $('MCP Server Trigger').item.json.guardian_phone_hash }}",
+        "message": "=Report for {{ $json.name }}, term {{ $json.term }}: attendance {{ $json.attendance_pct }}%. {{ $json.marks_summary }}"
+      },
+      "id": "44444444-4444-4444-8444-444444444404",
+      "name": "Send report by SMS",
+      "type": "n8n-nodes-base.africasTalking",
+      "typeVersion": 1,
+      "position": [900, 220],
+      "credentials": { "africasTalkingApi": { "id": "kahawa-at", "name": "Africa's Talking (sandbox)" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"status\": \"refused\", \"reason\": \"guardian not confirmed\" } }}"
+      },
+      "id": "44444444-4444-4444-8444-444444444405",
+      "name": "Respond: refused",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [680, 400]
+    }
+  ],
+  "connections": {
+    "MCP Server Trigger": {
+      "main": [[{ "node": "Guardian confirmed?", "type": "main", "index": 0 }]]
+    },
+    "Guardian confirmed?": {
+      "main": [
+        [{ "node": "Fetch report", "type": "main", "index": 0 }],
+        [{ "node": "Respond: refused", "type": "main", "index": 0 }]
+      ]
+    },
+    "Fetch report": {
+      "main": [[{ "node": "Send report by SMS", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "1",
+  "meta": { "templateCredsSetupCompleted": true }
+}

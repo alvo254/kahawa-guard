@@ -1,0 +1,20 @@
+# Applied in Scene 3b to show Kyverno refusing it in the hardened profile.
+# Everything this pod spec does (root, privileged, latest tag, no resource
+# limits) is legal in the naked profile and refused the moment admission
+# control is turned on.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: naked-probe
+  namespace: gateway
+  labels:
+    app: naked-probe
+spec:
+  containers:
+    - name: probe
+      image: alpine:latest          # refused by disallow-latest-tag
+      command: ["sleep", "3600"]
+      securityContext:
+        privileged: true            # refused by the restricted PSA level
+        runAsUser: 0
+      # no resources block at all   # refused by require-limits

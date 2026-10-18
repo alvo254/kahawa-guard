@@ -1,0 +1,17 @@
+# Applied by: make harden PROVIDER=mistral
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: gateway-egress-model-mistral
+  namespace: gateway
+spec:
+  endpointSelector:
+    matchLabels:
+      app: gateway
+  egress:
+    - toFQDNs:
+        - matchName: api.mistral.ai
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP

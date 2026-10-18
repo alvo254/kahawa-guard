@@ -1,0 +1,65 @@
+# The gateway may reach DNS, the MCP tool server (L7-restricted to /mcp), n8n,
+# Postgres and Redis. The model provider rule lives in providers/ so it can be
+# swapped between Mistral and Ollama. Cilium adds up every policy that selects a
+# pod, so splitting the rules across files changes nothing about what is allowed.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: gateway-egress
+  namespace: gateway
+spec:
+  endpointSelector:
+    matchLabels:
+      app: gateway
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+          rules:
+            dns:
+              - matchPattern: "*"
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: tools
+            app: kahawa-tools
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+          rules:
+            http:
+              - method: "POST"
+                path: "/mcp"
+              - method: "GET"
+                path: "/mcp"
+              - method: "DELETE"
+                path: "/mcp"
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: n8n
+            app: n8n
+      toPorts:
+        - ports:
+            - port: "5678"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: data
+            app: postgres
+      toPorts:
+        - ports:
+            - port: "5432"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: data
+            app: redis
+      toPorts:
+        - ports:
+            - port: "6379"
+              protocol: TCP

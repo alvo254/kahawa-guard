@@ -1,0 +1,41 @@
+{{- if .Values.recordsFs.enabled }}
+{{/*
+Scene 3c. A vulnerable-by-design stdio MCP server over member records.
+It is reached with `kubectl exec -i`, not over the network, which is why there is
+no Service. The container gives it only /srv/records, read-only, as a non-root
+user; Tetragon's confine-records-fs policy enforces the same boundary in the
+kernel, where the server's own path-checking bugs cannot reach it.
+*/}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: records-fs
+  namespace: tools
+  labels:
+    app: records-fs
+    kahawa.io/tier: tools
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: records-fs }
+  template:
+    metadata:
+      labels:
+        app: records-fs
+        kahawa.io/tier: tools
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      containers:
+        - name: server
+          image: {{ include "kahawa.image" (dict "root" . "name" "records-fs") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # Idle; the scene pipes JSON-RPC into a fresh process over kubectl exec.
+          command: ["sleep", "infinity"]
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          {{- include "kahawa.resources" (dict "root" . "component" "tools") | nindent 10 }}
+          env:
+            - { name: ALLOWED_DIR, value: "/srv/records" }
+{{- end }}

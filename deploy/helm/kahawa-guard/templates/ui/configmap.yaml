@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kahawa-ui-nginx
+  namespace: kahawa-ui
+  labels:
+    {{- include "kahawa.labels" . | nindent 4 }}
+data:
+  nginx.conf: |
+{{ .Files.Get "files/nginx.conf" | indent 4 }}

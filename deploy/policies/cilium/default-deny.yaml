@@ -1,0 +1,17 @@
+# Default deny for every workload namespace. Everything the demo needs is then
+# allowed back explicitly by the files alongside this one. Anything not listed,
+# including the attacker namespace, is dropped and shows up in Hubble.
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: default-deny-kahawa
+spec:
+  endpointSelector:
+    matchExpressions:
+      - key: k8s:io.kubernetes.pod.namespace
+        operator: In
+        values: ["kahawa-ui", "gateway", "tools", "n8n", "data", "attacker"]
+  ingress:
+    - {}
+  egress:
+    - {}

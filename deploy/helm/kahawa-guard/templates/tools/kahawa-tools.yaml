@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kahawa-tools
+  namespace: tools
+  labels:
+    app: kahawa-tools
+    kahawa.io/tier: tools
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: kahawa-tools }
+  template:
+    metadata:
+      labels:
+        app: kahawa-tools
+        kahawa.io/tier: tools       # selected by the Tetragon block-shells policy
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      containers:
+        - name: server
+          image: {{ include "kahawa.image" (dict "root" . "name" "kahawa-tools") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          {{- include "kahawa.resources" (dict "root" . "component" "tools") | nindent 10 }}
+          env:
+            - { name: PROFILE, value: {{ .Values.profile | quote }} }
+            - { name: DATABASE_URL, value: "postgresql://{{ .Values.data.postgres.user }}:{{ .Values.data.postgres.password }}@postgres.data.svc.cluster.local:5432/{{ .Values.data.postgres.database }}" }
+            # fetch_url exists on purpose for Scene 3b. The pack disables it in the
+            # hardened profile, and the network policy would stop it anyway.
+            - { name: ALLOW_FETCH_URL, value: {{ if .Values.security.restricted }}"false"{{ else }}"true"{{ end }} }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kahawa-tools
+  namespace: tools
+  labels:
+    app: kahawa-tools
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector: { app: kahawa-tools }
+  ports:
+    - name: mcp
+      port: 8000
+      targetPort: 8000

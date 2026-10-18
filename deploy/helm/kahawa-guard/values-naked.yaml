@@ -1,0 +1,32 @@
+# NAKED. Nothing is in the way. This is the profile the attacks land in.
+profile: naked
+
+guards:
+  inputGuard: false
+  expertGuard: false
+  provenance: false
+  registry: false
+  toolGate: false
+  budgets: false
+
+security:
+  restricted: false                      # root and privileged allowed
+  automountServiceAccountToken: true     # default SA, token mounted
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+  adminTokenRequired: false              # admin API wide open
+  secretsFromVault: false                # plain env vars in the chart
+
+expose:
+  type: NodePort
+
+resources:
+  enabled: false
+  quotas: false
+
+attacker:
+  enabled: true
+
+n8n:
+  nodesExclude: ""                       # Code and Execute Command enabled
+  requireMcpToken: false                 # MCP trigger and webhooks unauthenticated

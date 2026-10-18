@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kahawa-ui
+  namespace: kahawa-ui
+  labels:
+    app: kahawa-ui
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: kahawa-ui }
+  template:
+    metadata:
+      labels:
+        app: kahawa-ui
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      containers:
+        - name: nginx
+          image: {{ include "kahawa.image" (dict "root" . "name" "ui") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          {{- include "kahawa.resources" (dict "root" . "component" "ui") | nindent 10 }}
+          volumeMounts:
+            - { name: nginx-conf, mountPath: /etc/nginx/conf.d/default.conf, subPath: nginx.conf }
+            - { name: cache, mountPath: /var/cache/nginx }
+            - { name: run, mountPath: /var/run }
+          readinessProbe:
+            httpGet: { path: /, port: 8080 }
+      volumes:
+        - name: nginx-conf
+          configMap: { name: kahawa-ui-nginx }
+        - name: cache
+          emptyDir: {}
+        - name: run
+          emptyDir: {}

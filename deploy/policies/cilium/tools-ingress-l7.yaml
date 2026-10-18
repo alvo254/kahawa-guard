@@ -1,0 +1,26 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: kahawa-tools-ingress
+  namespace: tools
+spec:
+  endpointSelector:
+    matchLabels:
+      app: kahawa-tools
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: gateway
+            app: gateway
+      toPorts:
+        - ports:
+            - port: "8000"
+              protocol: TCP
+          rules:
+            http:
+              - method: "POST"
+                path: "/mcp"
+              - method: "GET"
+                path: "/mcp"
+              - method: "DELETE"
+                path: "/mcp"

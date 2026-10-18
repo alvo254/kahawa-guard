@@ -1,0 +1,21 @@
+{{/*
+All packs are mounted, not just the active one: the gateway switches the active
+pack through the admin API because a mounted ConfigMap update can take a minute
+or more to reach a pod, which is too slow on stage.
+*/}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kahawa-packs
+  namespace: gateway
+  labels:
+    {{- include "kahawa.labels" . | nindent 4 }}
+data:
+{{- range $path, $_ := .Files.Glob "packs/*.yaml" }}
+  {{ base $path }}: |
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- range $path, $_ := .Files.Glob "prompts/*.md" }}
+  {{ base $path }}: |
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}

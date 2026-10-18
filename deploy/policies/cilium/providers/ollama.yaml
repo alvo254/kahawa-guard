@@ -1,0 +1,21 @@
+# Applied by: make harden PROVIDER=ollama
+# 172.18.0.1 is the usual kind Docker network gateway, i.e. the host running
+# Ollama. Confirm yours with: docker network inspect kind
+# Bind Ollama to that address only (OLLAMA_HOST=172.18.0.1:11434), never 0.0.0.0 —
+# its API has no authentication by default.
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: gateway-egress-model-ollama
+  namespace: gateway
+spec:
+  endpointSelector:
+    matchLabels:
+      app: gateway
+  egress:
+    - toCIDR:
+        - 172.18.0.1/32
+      toPorts:
+        - ports:
+            - port: "11434"
+              protocol: TCP

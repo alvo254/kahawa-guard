@@ -1,0 +1,4 @@
+tetragon:
+  hostProcPath: /proc         # needed on kind
+  enableProcessCred: true
+  enableProcessNs: true

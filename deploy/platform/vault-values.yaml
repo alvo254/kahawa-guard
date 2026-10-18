@@ -1,0 +1,13 @@
+# DEV MODE. In-memory, auto-unsealed, root token "root". For this demo only.
+server:
+  dev:
+    enabled: true
+    devRootToken: "root"
+  standalone:
+    enabled: false
+  dataStorage:
+    enabled: false
+injector:
+  enabled: false
+ui:
+  enabled: true

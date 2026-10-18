@@ -1,0 +1,26 @@
+# Any attempt to exec a shell inside a tool-tier pod is killed in the kernel.
+# The tier label is set on kahawa-tools, farm-weather, records-fs and n8n pods.
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: block-shells-in-tool-pods
+spec:
+  podSelector:
+    matchLabels:
+      kahawa.io/tier: tools
+  kprobes:
+    - call: "security_bprm_check"
+      syscall: false
+      args:
+        - index: 0
+          type: "linux_binprm"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "Postfix"
+              values:
+                - "/sh"
+                - "/bash"
+                - "/dash"
+          matchActions:
+            - action: Sigkill

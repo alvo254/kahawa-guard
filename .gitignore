@@ -1,0 +1,20 @@
+# secrets and local config
+.env
+*.local
+# build output
+ui/node_modules/
+ui/dist/
+gateway/.venv/
+__pycache__/
+*.pyc
+.uv/
+# scratch
+*.log
+.DS_Store
+# Inspector state (may contain tokens on hosts without a keychain)
+.mcp-inspector/
+
+# staged into the chart by `make stage`; the originals live at the repo root
+deploy/helm/kahawa-guard/packs/
+deploy/helm/kahawa-guard/prompts/
+deploy/helm/kahawa-guard/files/

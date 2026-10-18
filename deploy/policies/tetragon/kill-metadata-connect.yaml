@@ -1,0 +1,21 @@
+# Cilium already drops the packet; this kills the process that tried, so the room
+# sees the difference between "connection refused" and "the thing is gone".
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: kill-metadata-connect
+spec:
+  kprobes:
+    - call: "tcp_connect"
+      syscall: false
+      args:
+        - index: 0
+          type: "sock"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "DAddr"
+              values:
+                - "169.254.169.254"
+          matchActions:
+            - action: Sigkill

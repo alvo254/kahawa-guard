@@ -1,0 +1,39 @@
+{{- if .Values.resources.quotas }}
+{{- range $ns := list "kahawa-ui" "gateway" "tools" "n8n" "data" }}
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: kahawa-defaults
+  namespace: {{ $ns }}
+  labels:
+    {{- include "kahawa.labels" $ | nindent 4 }}
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+      defaultRequest:
+        cpu: 50m
+        memory: 128Mi
+      max:
+        cpu: "2"
+        memory: 2Gi
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: kahawa-quota
+  namespace: {{ $ns }}
+  labels:
+    {{- include "kahawa.labels" $ | nindent 4 }}
+spec:
+  hard:
+    requests.cpu: "2"
+    requests.memory: 4Gi
+    limits.cpu: "4"
+    limits.memory: 8Gi
+    pods: "12"
+{{- end }}
+{{- end }}

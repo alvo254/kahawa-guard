@@ -1,0 +1,97 @@
+# Shared defaults. The profile files on top of this are what actually differ:
+#   -f values.yaml -f values-naked.yaml      (or values-hardened.yaml)
+pack: coffee
+profile: naked
+
+image:
+  registry: kahawa
+  tag: dev
+  pullPolicy: IfNotPresent
+
+llm:
+  provider: mistral                 # mistral | ollama
+  mistral:
+    chatModel: mistral-small-latest
+    embedModel: mistral-embed
+    guardrailModel: moderation_llm_v2
+  ollama:
+    # The kind Docker network gateway, i.e. the host. Confirm with:
+    #   docker network inspect kind
+    baseUrl: http://172.18.0.1:11434/v1
+    chatModel: mistral-small3.2
+    embedModel: nomic-embed-text
+  # MUST match the vector(n) column in data/schema.sql.
+  # 1024 for mistral-embed, 768 for nomic-embed-text.
+  embedDim: 1024
+
+shieldstral:
+  url: ""
+  mode: cached                      # live | cached
+  apiKey: ""
+
+# Guard pipeline switches. The admin panel flips these at runtime; these are the
+# values the gateway starts with.
+guards:
+  inputGuard: false
+  expertGuard: false
+  provenance: false
+  registry: false
+  toolGate: false
+  budgets: false
+
+data:
+  postgres:
+    user: kahawa
+    password: kahawa
+    database: kahawa
+  redis: {}
+
+mcp:
+  # name, in-cluster url, and the pinned sha256 of the sorted tools/list result.
+  # Fill pins from `make mcp-pin`; an empty pin means "do not verify" and is only
+  # acceptable in the naked profile.
+  servers:
+    - name: kahawa-tools
+      url: http://kahawa-tools.tools.svc.cluster.local:8000/mcp
+      pin: ""
+    - name: n8n
+      url: http://n8n.n8n.svc.cluster.local:5678/mcp
+      pin: ""
+
+attacker:
+  enabled: true                     # fake-imds and the rogue farm-weather server
+  farmWeather:
+    rugPull: false                  # flip for the pinning moment in Scene 3
+
+recordsFs:
+  enabled: true                     # Scene 3c, stdio server
+
+# Overridden wholesale by the profile files.
+security:
+  restricted: false
+  automountServiceAccountToken: true
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+  adminTokenRequired: false
+  secretsFromVault: false
+
+expose:
+  type: NodePort
+
+resources:
+  enabled: false
+  quotas: false
+  default:
+    requests: { cpu: 50m, memory: 128Mi }
+    limits: { cpu: 500m, memory: 512Mi }
+  gateway:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 1Gi }
+  postgres:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+n8n:
+  # Naked leaves the Code and Execute Command nodes enabled; hardened blocks them.
+  nodesExclude: ""
+  requireMcpToken: false

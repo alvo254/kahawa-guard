@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: gateway
+  labels:
+    app: gateway
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: gateway }
+  template:
+    metadata:
+      labels:
+        app: gateway
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: gateway
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      containers:
+        - name: gateway
+          image: {{ include "kahawa.image" (dict "root" . "name" "gateway") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          {{- include "kahawa.resources" (dict "root" . "component" "gateway") | nindent 10 }}
+          env:
+            - { name: PROFILE,  value: {{ .Values.profile | quote }} }
+            - { name: PACK,     value: {{ .Values.pack | quote }} }
+            - { name: PACKS_DIR, value: "/etc/kahawa/packs" }
+            - { name: LLM_PROVIDER, value: {{ .Values.llm.provider | quote }} }
+            - { name: MISTRAL_CHAT_MODEL,  value: {{ .Values.llm.mistral.chatModel | quote }} }
+            - { name: MISTRAL_EMBED_MODEL, value: {{ .Values.llm.mistral.embedModel | quote }} }
+            - { name: GUARDRAIL_MODEL,     value: {{ .Values.llm.mistral.guardrailModel | quote }} }
+            - { name: OLLAMA_BASE_URL,   value: {{ .Values.llm.ollama.baseUrl | quote }} }
+            - { name: OLLAMA_CHAT_MODEL, value: {{ .Values.llm.ollama.chatModel | quote }} }
+            - { name: OLLAMA_EMBED_MODEL, value: {{ .Values.llm.ollama.embedModel | quote }} }
+            - { name: EMBED_DIM, value: {{ .Values.llm.embedDim | quote }} }
+            - { name: SHIELDSTRAL_URL,  value: {{ .Values.shieldstral.url | quote }} }
+            - { name: SHIELDSTRAL_MODE, value: {{ .Values.shieldstral.mode | quote }} }
+            - { name: DATABASE_URL, value: "postgresql://{{ .Values.data.postgres.user }}:{{ .Values.data.postgres.password }}@postgres.data.svc.cluster.local:5432/{{ .Values.data.postgres.database }}" }
+            - { name: REDIS_URL,    value: "redis://redis.data.svc.cluster.local:6379/0" }
+            - { name: MCP_SERVERS,  value: {{ .Values.mcp.servers | toJson | quote }} }
+            - { name: ADMIN_TOKEN_REQUIRED, value: {{ .Values.security.adminTokenRequired | quote }} }
+            - { name: GUARD_DEFAULTS, value: {{ .Values.guards | toJson | quote }} }
+            {{- if .Values.security.secretsFromVault }}
+            # HARDENED: secrets arrive as mounted files, read at startup.
+            - { name: SECRETS_DIR, value: "/etc/kahawa/secrets" }
+            {{- else }}
+            # NAKED: secrets straight into the environment, where anything that
+            # can read /proc or exec into the pod can read them too.
+            - name: MISTRAL_API_KEY
+              valueFrom: { secretKeyRef: { name: kahawa-secrets, key: MISTRAL_API_KEY, optional: true } }
+            - name: SHIELDSTRAL_API_KEY
+              valueFrom: { secretKeyRef: { name: kahawa-secrets, key: SHIELDSTRAL_API_KEY, optional: true } }
+            - name: N8N_MCP_TOKEN
+              valueFrom: { secretKeyRef: { name: kahawa-secrets, key: N8N_MCP_TOKEN, optional: true } }
+            - name: ADMIN_TOKEN
+              valueFrom: { secretKeyRef: { name: kahawa-secrets, key: ADMIN_TOKEN, optional: true } }
+            {{- end }}
+          volumeMounts:
+            - { name: packs, mountPath: /etc/kahawa/packs, readOnly: true }
+            {{- if .Values.security.secretsFromVault }}
+            - { name: secrets, mountPath: /etc/kahawa/secrets, readOnly: true }
+            {{- end }}
+            {{- if .Values.security.readOnlyRootFilesystem }}
+            - { name: tmp, mountPath: /tmp }
+            {{- end }}
+          livenessProbe:
+            httpGet: { path: /healthz, port: 8000 }
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet: { path: /healthz, port: 8000 }
+      volumes:
+        - name: packs
+          configMap: { name: kahawa-packs }
+        {{- if .Values.security.secretsFromVault }}
+        - name: secrets
+          secret: { secretName: kahawa-secrets, optional: true }
+        {{- end }}
+        {{- if .Values.security.readOnlyRootFilesystem }}
+        - name: tmp
+          emptyDir: {}
+        {{- end }}

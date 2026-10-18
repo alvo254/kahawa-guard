@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: data
+  labels:
+    {{- include "kahawa.labels" . | nindent 4 }}
+data:
+  schema.sql: |
+{{ .Files.Get "files/schema.sql" | indent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: data
+  labels:
+    app: postgres
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: postgres }
+  template:
+    metadata:
+      labels:
+        app: postgres
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      containers:
+        - name: postgres
+          image: {{ include "kahawa.image" (dict "root" . "name" "postgres") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5432
+          {{- include "kahawa.resources" (dict "root" . "component" "postgres") | nindent 10 }}
+          env:
+            - { name: POSTGRES_USER,     value: {{ .Values.data.postgres.user | quote }} }
+            - { name: POSTGRES_PASSWORD, value: {{ .Values.data.postgres.password | quote }} }
+            - { name: POSTGRES_DB,       value: {{ .Values.data.postgres.database | quote }} }
+            - { name: PGDATA,            value: /var/lib/postgresql/data/pgdata }
+            # Rendered into the schema by the init script, so the vector column
+            # width always matches the embedding model in use.
+            - { name: EMBED_DIM, value: {{ .Values.llm.embedDim | quote }} }
+          volumeMounts:
+            - { name: init, mountPath: /docker-entrypoint-initdb.d/schema.sql, subPath: schema.sql }
+            - { name: pgdata, mountPath: /var/lib/postgresql/data }
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", {{ .Values.data.postgres.user | quote }}]
+            initialDelaySeconds: 10
+      volumes:
+        - name: init
+          configMap: { name: postgres-init }
+        - name: pgdata
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: data
+  labels:
+    app: postgres
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector: { app: postgres }
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432

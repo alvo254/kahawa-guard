@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+  namespace: n8n
+  labels:
+    app: n8n
+    kahawa.io/tier: tools
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: n8n }
+  template:
+    metadata:
+      labels:
+        app: n8n
+        kahawa.io/tier: tools      # selected by the Tetragon block-shells policy
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
+      {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      containers:
+        - name: n8n
+          # Pin a current patched release in values. 2026 brought Ni8mare
+          # (CVE-2026-21858, unauthenticated RCE, CVSS 10) and an expression
+          # sandbox escape (CVE-2026-1470, CVSS 9.9).
+          image: {{ .Values.n8n.image | default "docker.io/n8nio/n8n:1.80.3" }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5678
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          {{- include "kahawa.resources" (dict "root" . "component" "n8n") | nindent 10 }}
+          env:
+            - { name: N8N_PORT, value: "5678" }
+            - { name: N8N_DIAGNOSTICS_ENABLED, value: "false" }
+            - { name: DB_TYPE, value: postgresdb }
+            - { name: DB_POSTGRESDB_HOST, value: postgres.data.svc.cluster.local }
+            - { name: DB_POSTGRESDB_DATABASE, value: {{ .Values.data.postgres.database | quote }} }
+            - { name: DB_POSTGRESDB_USER, value: {{ .Values.data.postgres.user | quote }} }
+            - { name: DB_POSTGRESDB_PASSWORD, value: {{ .Values.data.postgres.password | quote }} }
+            {{- if .Values.n8n.nodesExclude }}
+            # HARDENED: the Code and Execute Command nodes are gone.
+            - { name: NODES_EXCLUDE, value: {{ .Values.n8n.nodesExclude | quote }} }
+            {{- end }}
+            {{- if .Values.security.secretsFromVault }}
+            - name: N8N_ENCRYPTION_KEY
+              valueFrom: { secretKeyRef: { name: n8n-secrets, key: encryption_key, optional: true } }
+            {{- end }}
+          volumeMounts:
+            - { name: n8n-data, mountPath: /home/node/.n8n }
+      volumes:
+        - name: n8n-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: n8n
+  namespace: n8n
+  labels:
+    app: n8n
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.expose.type }}
+  selector: { app: n8n }
+  ports:
+    - name: http
+      port: 5678
+      targetPort: 5678
+      {{- if eq .Values.expose.type "NodePort" }}
+      nodePort: 30678
+      {{- end }}

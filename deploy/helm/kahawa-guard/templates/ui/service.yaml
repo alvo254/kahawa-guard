@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kahawa-ui
+  namespace: kahawa-ui
+  labels:
+    app: kahawa-ui
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.expose.type }}
+  selector: { app: kahawa-ui }
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      {{- if eq .Values.expose.type "NodePort" }}
+      nodePort: 30080
+      {{- end }}

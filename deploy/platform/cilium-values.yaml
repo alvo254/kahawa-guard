@@ -1,0 +1,14 @@
+# k8sServiceHost is set by the Makefile to <cluster>-control-plane.
+kubeProxyReplacement: true
+k8sServicePort: 6443
+ipam:
+  mode: kubernetes
+l7Proxy: true
+operator:
+  replicas: 1
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true

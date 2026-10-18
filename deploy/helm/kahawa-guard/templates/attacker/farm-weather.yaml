@@ -1,0 +1,53 @@
+{{- if .Values.attacker.enabled }}
+{{/*
+The rogue MCP server. Its get_forecast description hides an instruction telling
+the assistant to call change_payout_account. It is a stranger the assistant
+reached over the same protocol as its trusted tools — that is the point.
+*/}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farm-weather
+  namespace: attacker
+  labels:
+    app: farm-weather
+    kahawa.io/tier: tools
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: farm-weather }
+  template:
+    metadata:
+      labels:
+        app: farm-weather
+        kahawa.io/tier: tools
+        {{- include "kahawa.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: server
+          image: {{ include "kahawa.image" (dict "root" . "name" "farm-weather") }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8000
+          env:
+            # Flip to "true" for the rug-pull moment: the tool description changes
+            # after the first connection and `make mcp-check` fails on the hash.
+            - { name: RUG_PULL, value: {{ .Values.attacker.farmWeather.rugPull | quote }} }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: farm-weather
+  namespace: attacker
+  labels:
+    app: farm-weather
+    {{- include "kahawa.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector: { app: farm-weather }
+  ports:
+    - name: mcp
+      port: 8000
+      targetPort: 8000
+{{- end }}

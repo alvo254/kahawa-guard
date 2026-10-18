@@ -1,0 +1,6 @@
+apiVersion: v2
+name: kahawa-guard
+description: Kahawa Guard demo — attackable AI assistant for a coffee cooperative, and its layered defence.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

@@ -1,0 +1,23 @@
+# Observe only. Reading a service account token is not itself an attack, so this
+# records rather than kills — and the recording is what you show on stage.
+apiVersion: cilium.io/v1alpha1
+kind: TracingPolicy
+metadata:
+  name: watch-sa-token-reads
+spec:
+  kprobes:
+    - call: "security_file_permission"
+      syscall: false
+      args:
+        - index: 0
+          type: "file"
+        - index: 1
+          type: "int"
+      selectors:
+        - matchArgs:
+            - index: 0
+              operator: "Prefix"
+              values:
+                - "/var/run/secrets/kubernetes.io/serviceaccount"
+          matchActions:
+            - action: Post

@@ -1,0 +1,25 @@
+{{- $nss := list
+  (dict "name" "kahawa-ui" "restrict" true)
+  (dict "name" "gateway"   "restrict" true)
+  (dict "name" "tools"     "restrict" true)
+  (dict "name" "n8n"       "restrict" true)
+  (dict "name" "data"      "restrict" true)
+  (dict "name" "attacker"  "restrict" false)
+}}
+{{- range $nss }}
+{{- if or (ne .name "attacker") $.Values.attacker.enabled }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "kahawa.labels" $ | nindent 4 }}
+    {{- if and $.Values.security.restricted .restrict }}
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+    {{- end }}
+{{- end }}
+{{- end }}
