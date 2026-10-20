@@ -13,7 +13,8 @@ llm:
   mistral:
     chatModel: ministral-8b-2512       # free tier: 625k TPM / 3.13 RPS (mistral-small: 20k TPM / 1 RPS -> 429s)
     embedModel: mistral-embed
-    guardrailModel: moderation_llm_v2
+    guardrailModel: moderation_llm_v2          # inline guardrails key on /v1/chat/completions
+    moderationModel: mistral-moderation-latest # model for the standalone /v1/moderations call
   ollama:
     # The kind Docker network gateway, i.e. the host. Confirm with:
     #   docker network inspect kind

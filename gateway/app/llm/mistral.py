@@ -50,8 +50,8 @@ class MistralProvider:
             payload["tools"] = tools
             payload["tool_choice"] = "auto"
         if guardrail:
-            # Shape only — confirm the current field name in the Mistral docs.
-            payload["guardrails"] = [{"type": settings.guardrail_model}]
+            # Each entry carries exactly one config, keyed by the guardrail name.
+            payload["guardrails"] = [{settings.guardrail_model: {}}]
 
         resp = await self._client.post("/v1/chat/completions", json=payload)
         resp.raise_for_status()
@@ -90,7 +90,7 @@ class MistralProvider:
         available on an endpoint. Returns the raw category scores."""
         resp = await self._client.post(
             "/v1/moderations",
-            json={"model": settings.guardrail_model, "input": [text]},
+            json={"model": settings.moderation_model, "input": [text]},
         )
         resp.raise_for_status()
         return resp.json()

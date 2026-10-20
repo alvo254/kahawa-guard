@@ -42,7 +42,8 @@ class Settings(BaseSettings):
     mistral_chat_model: str = "ministral-8b-2512"
     mistral_embed_model: str = "mistral-embed"
     mistral_base_url: str = "https://api.mistral.ai"
-    guardrail_model: str = "moderation_llm_v2"
+    guardrail_model: str = "moderation_llm_v2"          # inline guardrails key on chat
+    moderation_model: str = "mistral-moderation-latest" # standalone /v1/moderations
 
     ollama_base_url: str = "http://172.18.0.1:11434/v1"
     ollama_chat_model: str = "mistral-small3.2"

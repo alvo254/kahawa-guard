@@ -55,7 +55,7 @@ installing).
 The actual crash, from the agent's own log:
 
 ```
-level=fatal msg="auto-direct-node-routes cannot be used with tunneling. Packets must be routed through the tunnel device."
+level=fatal msg="auto-direct-node-routes cannot be used withtunneling. Packets must be routed through the tunnel device."
 ```
 
 `deploy/platform/cilium-values.yaml` had both set:
