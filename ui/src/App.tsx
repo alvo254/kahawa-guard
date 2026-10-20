@@ -20,6 +20,9 @@ export default function App() {
     refreshState();
     const unsubscribe = subscribeVerdicts((v) => {
       setVerdicts((prev) => [...prev.slice(-199), v]);
+      // Every chat re-checks the MCP pins; pull fresh server state so the
+      // panel does not keep showing what was true at page load.
+      if (v.layer === "mcp_pin") refreshState();
     });
     return unsubscribe;
   }, [refreshState]);

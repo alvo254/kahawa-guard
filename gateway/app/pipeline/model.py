@@ -72,10 +72,12 @@ async def answer(
     except ModelUnavailable:
         raise
     except Exception as exc:                                 # noqa: BLE001
-        log.warning("model call failed: %s", exc)
+        # Timeouts stringify to "", so fall back to the exception type.
+        reason = str(exc) or type(exc).__name__
+        log.warning("model call failed: %s", reason)
         bus.publish(Verdict(
             layer="model", decision="refuse",
-            detail=f"{settings.llm_provider} unreachable: {exc}",
+            detail=f"{settings.llm_provider} unreachable: {reason}",
             pack=packs.active_name, profile=settings.profile, phone_hash=phone_hash,
         ))
         raise ModelUnavailable(str(exc)) from exc

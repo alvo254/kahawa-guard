@@ -1,3 +1,40 @@
+{{- define "kahawa.n8nDbEnv" -}}
+- { name: DB_TYPE, value: postgresdb }
+- { name: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS, value: "true" }
+- { name: DB_POSTGRESDB_HOST, value: postgres.data.svc.cluster.local }
+- { name: DB_POSTGRESDB_DATABASE, value: {{ .Values.data.postgres.database | quote }} }
+- { name: DB_POSTGRESDB_USER, value: {{ .Values.data.postgres.user | quote }} }
+- { name: DB_POSTGRESDB_PASSWORD, value: {{ .Values.data.postgres.password | quote }} }
+{{- end }}
+# The workflows and the script that imports them. Staged from n8n/ by `make stage`.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: n8n-workflows
+  namespace: n8n
+  labels:
+    {{- include "kahawa.labels" . | nindent 4 }}
+data:
+{{- range $path, $_ := .Files.Glob "files/n8n/*" }}
+  {{ base $path }}: |
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: n8n-seed
+  namespace: n8n
+  labels:
+    {{- include "kahawa.labels" . | nindent 4 }}
+type: Opaque
+stringData:
+  AT_API_KEY: {{ .Values.n8n.atApiKey | default "" | quote }}
+  {{- if .Values.n8n.requireMcpToken }}
+  # HARDENED: must equal the token the gateway sends (kahawa-secrets N8N_MCP_TOKEN).
+  N8N_MCP_TOKEN: {{ required "n8n.mcpToken is required when n8n.requireMcpToken is true" .Values.n8n.mcpToken | quote }}
+  {{- end }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,15 +54,42 @@ spec:
         app: n8n
         kahawa.io/tier: tools      # selected by the Tetragon block-shells policy
         {{- include "kahawa.labels" . | nindent 8 }}
+      annotations:
+        # Re-seed whenever a workflow, the seed script or a seeded secret changes.
+        checksum/workflows: {{ .Files.Glob "files/n8n/*" | toString | sha256sum }}
+        checksum/seed: {{ printf "%v%v" .Values.n8n.atApiKey .Values.n8n.mcpToken | sha256sum }}
     spec:
+      # Service links would inject N8N_PORT=tcp://… (from the Service named n8n),
+      # which collides with n8n's own N8N_PORT setting.
+      enableServiceLinks: false
       automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
       {{- include "kahawa.podSecurityContext" . | nindent 6 }}
+      # n8n's state is an emptyDir, so every pod start re-imports the credentials
+      # and workflows and activates the MCP server before n8n itself starts.
+      initContainers:
+        - name: seed
+          image: {{ .Values.n8n.image | default "docker.io/n8nio/n8n:1.123.22" }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh", "/seed/seed.sh"]
+          {{- include "kahawa.containerSecurityContext" . | nindent 10 }}
+          env:
+            {{- include "kahawa.n8nDbEnv" . | nindent 12 }}
+            - { name: WF_DIR, value: /seed }
+            - { name: N8N_DIAGNOSTICS_ENABLED, value: "false" }
+          envFrom:
+            - secretRef: { name: n8n-seed }
+          volumeMounts:
+            - { name: n8n-data, mountPath: /home/node/.n8n }
+            - { name: n8n-workflows, mountPath: /seed, readOnly: true }
+            - { name: seed-tmp, mountPath: /tmp }
       containers:
         - name: n8n
           # Pin a current patched release in values. 2026 brought Ni8mare
-          # (CVE-2026-21858, unauthenticated RCE, CVSS 10) and an expression
-          # sandbox escape (CVE-2026-1470, CVSS 9.9).
-          image: {{ .Values.n8n.image | default "docker.io/n8nio/n8n:1.80.3" }}
+          # (CVE-2026-21858, unauthenticated RCE, CVSS 10, fixed in 1.121.0) and an
+          # expression sandbox escape (CVE-2026-1470, CVSS 9.9, fixed in 1.123.17).
+          # 1.123.22 also carries the follow-up sandbox fixes, and the MCP Trigger v2
+          # the workflows use.
+          image: {{ .Values.n8n.image | default "docker.io/n8nio/n8n:1.123.22" }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 5678
@@ -34,11 +98,7 @@ spec:
           env:
             - { name: N8N_PORT, value: "5678" }
             - { name: N8N_DIAGNOSTICS_ENABLED, value: "false" }
-            - { name: DB_TYPE, value: postgresdb }
-            - { name: DB_POSTGRESDB_HOST, value: postgres.data.svc.cluster.local }
-            - { name: DB_POSTGRESDB_DATABASE, value: {{ .Values.data.postgres.database | quote }} }
-            - { name: DB_POSTGRESDB_USER, value: {{ .Values.data.postgres.user | quote }} }
-            - { name: DB_POSTGRESDB_PASSWORD, value: {{ .Values.data.postgres.password | quote }} }
+            {{- include "kahawa.n8nDbEnv" . | nindent 12 }}
             {{- if .Values.n8n.nodesExclude }}
             # HARDENED: the Code and Execute Command nodes are gone.
             - { name: NODES_EXCLUDE, value: {{ .Values.n8n.nodesExclude | quote }} }
@@ -51,6 +111,10 @@ spec:
             - { name: n8n-data, mountPath: /home/node/.n8n }
       volumes:
         - name: n8n-data
+          emptyDir: {}
+        - name: n8n-workflows
+          configMap: { name: n8n-workflows }
+        - name: seed-tmp
           emptyDir: {}
 ---
 apiVersion: v1

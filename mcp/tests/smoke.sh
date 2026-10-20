@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # mcp/tests/smoke.sh — call every kahawa-tools tool through the Inspector CLI
 # with known inputs and fail if a result is missing or malformed.
-# Usage: smoke.sh [URL]   (default http://localhost:8000/mcp)
+# Usage: smoke.sh [URL]   (default http://localhost:8001/mcp)
 set -euo pipefail
 
-URL=${1:-http://localhost:8000/mcp}
+URL=${1:-http://localhost:8001/mcp}
 INSPECTOR_VERSION=${INSPECTOR_VERSION:-latest}
 INSPECTOR="npx @modelcontextprotocol/inspector@${INSPECTOR_VERSION}"
 

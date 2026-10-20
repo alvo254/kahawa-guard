@@ -1,38 +1,55 @@
 {
-  "name": "send_sms",
+  "id": "kgSendSms0000001",
+  "name": "kahawa: send_sms",
   "nodes": [
     {
       "parameters": {
-        "path": "send-sms",
-        "toolDescription": "Send a short SMS to a member's registered phone number, for example an OTP or a payment notification. Capped by the pack's tool gate at one call per message.",
-        "parametersSchema": {
-          "type": "object",
-          "required": ["grower_code", "message"],
-          "properties": {
-            "grower_code": { "type": "string" },
-            "message": { "type": "string", "maxLength": 300 }
-          }
+        "inputSource": "workflowInputs",
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "grower_code",
+              "type": "string"
+            },
+            {
+              "name": "message",
+              "type": "string"
+            }
+          ]
         }
       },
       "id": "33333333-3333-4333-8333-333333333301",
-      "name": "MCP Server Trigger",
-      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
-      "typeVersion": 1,
-      "position": [240, 300]
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        300
+      ]
     },
     {
       "parameters": {
         "operation": "executeQuery",
         "query": "SELECT phone_e164 FROM members WHERE grower_code = $1;",
-        "options": { "queryReplacement": "={{ [$json.grower_code] }}" }
+        "options": {
+          "queryReplacement": "={{ [$json.grower_code] }}"
+        }
       },
       "id": "33333333-3333-4333-8333-333333333302",
       "name": "Look up member",
       "notes": "phone_e164, not phone_hash — the hash is a one-way SHA256 and cannot be dialed. Only this workflow's Postgres query touches phone_e164; the gateway itself never selects it.",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
-      "position": [460, 300],
-      "credentials": { "postgres": { "id": "kahawa-postgres", "name": "Kahawa Postgres" } }
+      "position": [
+        460,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "kahawa-postgres",
+          "name": "Kahawa Postgres"
+        }
+      }
     },
     {
       "parameters": {
@@ -41,8 +58,14 @@
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            { "name": "Accept", "value": "application/json" },
-            { "name": "Content-Type", "value": "application/x-www-form-urlencoded" }
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
           ]
         },
         "authentication": "genericCredentialType",
@@ -51,9 +74,18 @@
         "contentType": "form-urlencoded",
         "bodyParameters": {
           "parameters": [
-            { "name": "username", "value": "sandbox" },
-            { "name": "to", "value": "={{ $json.phone_e164 }}" },
-            { "name": "message", "value": "={{ $('MCP Server Trigger').item.json.message }}" }
+            {
+              "name": "username",
+              "value": "sandbox"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.phone_e164 }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ $('Start').item.json.message }}"
+            }
           ]
         }
       },
@@ -62,23 +94,49 @@
       "notes": "Africa's Talking has no dedicated n8n node — this calls its REST API directly. The apiKey credential (name 'apiKey', value from AT_API_KEY) is created once in n8n's own Credentials UI; it is never exported with the workflow.",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [680, 300],
+      "position": [
+        680,
+        300
+      ],
       "credentials": {
-        "httpHeaderAuth": { "id": "kahawa-at-header", "name": "Africa's Talking apiKey header" }
+        "httpHeaderAuth": {
+          "id": "kahawa-at-header",
+          "name": "Africa's Talking apiKey header"
+        }
       }
     }
   ],
   "connections": {
-    "MCP Server Trigger": {
-      "main": [[{ "node": "Look up member", "type": "main", "index": 0 }]]
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Look up member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Look up member": {
-      "main": [[{ "node": "Send SMS", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Send SMS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
-  "settings": { "executionOrder": "v1" },
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "pinData": {},
-  "versionId": "1",
-  "meta": { "templateCredsSetupCompleted": true }
+  "versionId": "2",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
 }

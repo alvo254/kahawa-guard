@@ -1,4 +1,5 @@
 {
-  "http://localhost:8000/mcp": "",
-  "http://localhost:8100/mcp": ""
+  "http://localhost:8001/mcp": "29a8f9f8371768c22c32ee80e200c9aa91da40c2a84c7e9a10c24fd6f6741038",
+  "http://localhost:8100/mcp": "d0bd16324222fc096222f65895fef16e99cad8acf15e53d26f43fec8caca6f8a",
+  "http://localhost:5678/mcp/kahawa": "39af347394515abfe373500fbe3bdb68a67b97b8a075775937ada2a192c62511"
 }

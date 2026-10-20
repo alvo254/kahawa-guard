@@ -18,7 +18,8 @@ send() {
 
 require_gateway() {
   if ! curl -sf -o /dev/null "$GATEWAY_URL/healthz"; then
-    echo "gateway not reachable at $GATEWAY_URL — run 'make ui' or port-forward it first" >&2
+    echo "gateway not reachable at $GATEWAY_URL — run './scripts/port-forwards.sh gateway' first" >&2
+    echo "(a forward dies whenever the gateway pod restarts, e.g. after make deploy)" >&2
     exit 1
   fi
 }

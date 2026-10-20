@@ -87,7 +87,15 @@ export default function LayerSwitches({
         {state.servers.map((s) => (
           <div key={s.name} className={`pin-row ${s.pinned_ok ? "pin-ok" : "pin-bad"}`}>
             <span>{s.name}</span>
-            <span>{s.error ? "unreachable" : s.pinned_ok ? "pin ok" : "PIN MISMATCH"}</span>
+            <span>
+              {s.error
+                ? "unreachable"
+                : s.pinned_ok
+                  ? "pin ok"
+                  : s.expected_pin
+                    ? "PIN MISMATCH"
+                    : "NOT PINNED"}
+            </span>
           </div>
         ))}
       </div>

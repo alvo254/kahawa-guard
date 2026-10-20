@@ -68,6 +68,10 @@ class Registry:
             name = data.get("name") or path.stem
             prompt = ""
             prompt_file = data.get("prompt_file")
+            # NAKED may run a plainer prompt: the one most teams ship, without
+            # the rules that make the model refuse an injected instruction itself.
+            if not settings.hardened and data.get("naked_prompt_file"):
+                prompt_file = data["naked_prompt_file"]
             if prompt_file:
                 candidate = directory / prompt_file
                 if candidate.is_file():

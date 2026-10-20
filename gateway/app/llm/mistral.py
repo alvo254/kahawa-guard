@@ -45,6 +45,7 @@ class MistralProvider:
         payload: dict[str, Any] = {
             "model": settings.mistral_chat_model,
             "messages": messages,
+            "max_tokens": settings.mistral_max_tokens,
         }
         if tools:
             payload["tools"] = tools

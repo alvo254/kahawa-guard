@@ -44,9 +44,9 @@ can be pasted as written.
 ```bash
 export CLUSTER=kahawa
 export TAG=dev
-export PROFILE=naked          # naked | hardened
-export PACK=coffee            # coffee | health | education
-export PROVIDER=mistral       # mistral | ollama
+export PROFILE=naked          
+export PACK=coffee            
+export PROVIDER=mistral       
 export GATEWAY_API_VERSION=v1.3.0
 export CILIUM_VERSION=1.20.3
 export CHART=deploy/helm/kahawa-guard

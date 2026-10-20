@@ -41,6 +41,8 @@ class Settings(BaseSettings):
     mistral_api_key: str = ""
     mistral_chat_model: str = "ministral-8b-2512"
     mistral_embed_model: str = "mistral-embed"
+    # Caps the reply; without it a small model can run long enough to hit the 60s timeout.
+    mistral_max_tokens: int = 800
     mistral_base_url: str = "https://api.mistral.ai"
     guardrail_model: str = "moderation_llm_v2"          # inline guardrails key on chat
     moderation_model: str = "mistral-moderation-latest" # standalone /v1/moderations
@@ -51,6 +53,11 @@ class Settings(BaseSettings):
 
     # Must match the vector(n) column in the database.
     embed_dim: int = 1024
+
+    # Tool rounds per message. Each round the model sees the results so far and
+    # may call again; the last round offers no tools, so the reply is about what
+    # actually happened. 1 means a single proposal, as before.
+    max_tool_rounds: int = 3
 
     # --- expert guard ---
     shieldstral_url: str = ""

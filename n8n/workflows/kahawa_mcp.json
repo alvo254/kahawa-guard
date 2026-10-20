@@ -1,0 +1,228 @@
+{
+  "id": "kahawaMcpServer1",
+  "name": "kahawa: MCP server",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "none",
+        "path": "kahawa"
+      },
+      "id": "55555555-5555-4555-8555-555555555501",
+      "name": "MCP Server Trigger",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        460,
+        200
+      ],
+      "webhookId": "kahawa-mcp"
+    },
+    {
+      "parameters": {
+        "description": "Update a member's payout account reference by grower code.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "kgChangePayout01"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "grower_code": "={{ $fromAI('grower_code', `The member's grower code, e.g. KG-0003`, 'string') }}",
+            "account_ref": "={{ $fromAI('account_ref', `The new payout account reference`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "grower_code",
+              "displayName": "grower_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "account_ref",
+              "displayName": "account_ref",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "55555555-5555-4555-8555-555555555502",
+      "name": "change_payout_account",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        420
+      ],
+      "notes": "Not shown to the model. Call this ONLY after the gateway's tool gate has released it — this workflow trusts whatever grower_code and account_ref it is given, which is why nothing upstream of here is allowed to call it without the gateway having already collected the member's PIN and an officer's approval. The model-facing description stays plain on purpose: telling the model to wait for the gate is not a control; the gate is.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "description": "Send a short SMS to a member's registered phone number, for example an OTP or a payment notification. Capped by the pack's tool gate at one call per message.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "kgSendSms0000001"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "grower_code": "={{ $fromAI('grower_code', `The member's grower code, e.g. KG-0003`, 'string') }}",
+            "message": "={{ $fromAI('message', `The SMS text, at most 300 characters`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "grower_code",
+              "displayName": "grower_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "55555555-5555-4555-8555-555555555503",
+      "name": "send_sms",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        460,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "description": "Send a report about a specific child to a guardian. Education pack only. The gateway parks this tool until a guardian PIN is confirmed; this workflow still checks guardian_confirmed itself as a second line, because a workflow that trusts its caller completely is exactly the EscapeRoute lesson applied to n8n instead of a filesystem server.",
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "kgParentReport01"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "child_id": "={{ $fromAI('child_id', `The child's id`, 'string') }}",
+            "guardian_phone": "={{ $fromAI('guardian_phone', `E.164 number to send the report to. Supplied directly by the caller, not looked up from a hash: education is a thin stub with no guardian-contact table of its own yet.`, 'string') }}",
+            "guardian_confirmed": "={{ $fromAI('guardian_confirmed', `Whether the guardian PIN has been confirmed`, 'boolean') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "child_id",
+              "displayName": "child_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "guardian_phone",
+              "displayName": "guardian_phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "guardian_confirmed",
+              "displayName": "guardian_confirmed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "55555555-5555-4555-8555-555555555504",
+      "name": "send_parent_report",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        660,
+        420
+      ]
+    }
+  ],
+  "connections": {
+    "change_payout_account": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_sms": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_parent_report": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "2",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

@@ -25,10 +25,12 @@ PINS_FILE="$(dirname "$0")/../mcp/tests/pins.json"
 status=0
 for url in "$@"; do
   raw=$($INSPECTOR --cli "$url" --transport http --method tools/list --format json 2>/dev/null)
-  # Confirm this path against the Inspector CLI's actual output shape before
-  # relying on it — the docs note the result may be wrapped differently across
-  # releases.
-  hash=$(echo "$raw" | jq -S '.result' | tr -d '\n' | shasum -a 256 | cut -d' ' -f1)
+  # Same projection as pinning.canonical(): only name, description and
+  # inputSchema, tools sorted by name, keys sorted, compact. The Inspector may
+  # or may not wrap the list in .result, so accept both.
+  hash=$(echo "$raw" \
+    | jq -Sc '[(.result // .).tools[] | {name, description, inputSchema}] | sort_by(.name)' \
+    | tr -d '\n' | shasum -a 256 | cut -d' ' -f1)
 
   if [[ "$mode" == print ]]; then
     echo "$url $hash"

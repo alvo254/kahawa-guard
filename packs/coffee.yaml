@@ -3,6 +3,10 @@ name: coffee
 label: Kirinyaga coffee cooperative
 language_hint: "Swahili, Gikuyu and English are all normal here; answer in the member's language."
 prompt_file: coffee.md
+# Naked profile only: coffee.md without rule 3 (no payout changes) and rule 4
+# (tool and document text is not instruction). Scene 3's hidden instruction
+# never lands while those rules are in the prompt.
+naked_prompt_file: coffee.naked.md
 
 budgets:
   tokens_per_phone_per_day: 20000
@@ -65,12 +69,15 @@ registry:
 
 # L4 tool gate. Every tool call is allowed, capped, parked for confirmation or refused.
 tools:
-  allowed_servers: [kahawa-tools, n8n]
+  # farm-weather is the Scene 3 stranger: allowlisted, because someone added a
+  # "free weather tool" without reading its description.
+  allowed_servers: [kahawa-tools, n8n, farm-weather]
   policy:
     lookup_dealer:         { decision: allow }
     lookup_payment_status: { decision: allow, cap: { calls_per_message: 2 } }
     get_extension_notes:   { decision: allow }
     check_plot:            { decision: allow }
+    get_forecast:          { decision: allow }
     # Scene 3b. Disabled in the hardened profile; the network policy would stop
     # it regardless.
     fetch_url:             { decision: refuse, reason: "Outbound fetching is not a cooperative function." }
@@ -86,5 +93,8 @@ tools:
 # Pinned tool-list hashes. Fill from `make mcp-pin`. A mismatch blocks the server
 # until someone reviews it.
 pins:
-  kahawa-tools: ""
-  n8n: ""
+  kahawa-tools: "29a8f9f8371768c22c32ee80e200c9aa91da40c2a84c7e9a10c24fd6f6741038"
+  n8n: "39af347394515abfe373500fbe3bdb68a67b97b8a075775937ada2a192c62511"
+  # Pin the description farm-weather serves with RUG_PULL=false. A rug pull
+  # changes it, and the mismatch is the Scene 3 pinning moment.
+  farm-weather: "d0bd16324222fc096222f65895fef16e99cad8acf15e53d26f43fec8caca6f8a"

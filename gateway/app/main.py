@@ -164,12 +164,19 @@ async def chat(req: ChatRequest) -> ChatResponse:
     try:
         result = await model.answer(req.message, retrieved, ident.phone_hash)
 
-        # 6 tool gate (L4)
+        # 6 tool gate (L4), for up to max_tool_rounds. Each round the model sees
+        # what its calls actually did and may call again, as an agent would. That
+        # is also how a tool result gets to steer the next call, which Scene 3
+        # depends on.
         decisions: list[tool_gate.ToolDecision] = []
-        if result.tool_calls:
-            decisions = await tool_gate.run_calls(result.tool_calls, ident.phone_hash)
-            tool_messages: list[dict[str, Any]] = []
-            for d in decisions:
+        tool_messages: list[dict[str, Any]] = []
+        counts: dict[str, int] = {}
+        rounds = 0
+        while result.tool_calls:
+            rounds += 1
+            batch = await tool_gate.run_calls(result.tool_calls, ident.phone_hash, counts)
+            decisions.extend(batch)
+            for d in batch:
                 if d.decision == "allow" and d.result is not None:
                     payload = d.result.get("content", json.dumps(d.result))
                 elif d.decision == "park":
@@ -180,10 +187,11 @@ async def chat(req: ChatRequest) -> ChatResponse:
                     payload = f"NOT EXECUTED. {d.reason}"
                 tool_messages.append({"role": "system",
                                       "content": f"Result of {d.call.name}: {payload}"})
-            # Second pass so the reply reflects what actually happened, not what
-            # the model hoped would happen.
+            # The last round offers no tools, so the reply reflects what actually
+            # happened, not what the model hoped would happen.
             result = await model.answer(req.message, retrieved, ident.phone_hash,
-                                        extra_messages=tool_messages, with_tools=False)
+                                        extra_messages=tool_messages,
+                                        with_tools=rounds < settings.max_tool_rounds)
 
         reply = result.text or ""
 

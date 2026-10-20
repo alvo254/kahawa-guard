@@ -1,4 +1,5 @@
 {
+  "id": "kgConfirmAction1",
   "name": "confirm_action",
   "nodes": [
     {
@@ -13,19 +14,34 @@
       "name": "Webhook from gateway",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
-      "position": [240, 300],
+      "position": [
+        240,
+        300
+      ],
       "webhookId": "kahawa-confirm",
-      "credentials": { "httpHeaderAuth": { "id": "kahawa-webhook-auth", "name": "Kahawa Webhook Auth" } }
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kahawa-webhook-auth",
+          "name": "Kahawa Webhook Auth"
+        }
+      }
     },
     {
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
           "conditions": [
             {
               "leftValue": "={{ $json.member_confirmed && $json.officer_approved }}",
               "rightValue": true,
-              "operator": { "type": "boolean", "operation": "true" }
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
             }
           ],
           "combinator": "and"
@@ -35,7 +51,10 @@
       "name": "Both confirmations present?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [460, 300]
+      "position": [
+        460,
+        300
+      ]
     },
     {
       "parameters": {
@@ -46,7 +65,10 @@
       "name": "Respond: released",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.2,
-      "position": [680, 220]
+      "position": [
+        680,
+        220
+      ]
     },
     {
       "parameters": {
@@ -57,23 +79,50 @@
       "name": "Respond: waiting",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.2,
-      "position": [680, 380]
+      "position": [
+        680,
+        380
+      ]
     }
   ],
   "connections": {
     "Webhook from gateway": {
-      "main": [[{ "node": "Both confirmations present?", "type": "main", "index": 0 }]]
+      "main": [
+        [
+          {
+            "node": "Both confirmations present?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
     "Both confirmations present?": {
       "main": [
-        [{ "node": "Respond: released", "type": "main", "index": 0 }],
-        [{ "node": "Respond: waiting", "type": "main", "index": 0 }]
+        [
+          {
+            "node": "Respond: released",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond: waiting",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
-  "settings": { "executionOrder": "v1" },
+  "settings": {
+    "executionOrder": "v1"
+  },
   "staticData": null,
   "pinData": {},
   "versionId": "1",
-  "meta": { "templateCredsSetupCompleted": true }
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
 }

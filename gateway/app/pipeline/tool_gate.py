@@ -33,9 +33,12 @@ class ToolDecision:
     requires: list[str] = field(default_factory=list)
 
 
-async def run_calls(calls: list[ToolCall], phone_hash: str) -> list[ToolDecision]:
+async def run_calls(calls: list[ToolCall], phone_hash: str,
+                    counts: dict[str, int] | None = None) -> list[ToolDecision]:
+    """`counts` is shared across a message's tool rounds, so a cap is per
+    message and not per round."""
     decisions: list[ToolDecision] = []
-    counts: dict[str, int] = {}
+    counts = {} if counts is None else counts
 
     for call in calls:
         rule = packs.active.tool_rule(call.name)

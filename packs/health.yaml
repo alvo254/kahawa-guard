@@ -60,5 +60,5 @@ tools:
   default: refuse
 
 pins:
-  kahawa-tools: ""
-  n8n: ""
+  kahawa-tools: "29a8f9f8371768c22c32ee80e200c9aa91da40c2a84c7e9a10c24fd6f6741038"
+  n8n: "39af347394515abfe373500fbe3bdb68a67b97b8a075775937ada2a192c62511"

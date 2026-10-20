@@ -20,4 +20,7 @@ deploy/helm/kahawa-guard/prompts/
 deploy/helm/kahawa-guard/files/
 .env.example
 kind
+PROGRESS.md
+SCENE3-ATTACK.md
+
 

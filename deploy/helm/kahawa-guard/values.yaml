@@ -56,7 +56,13 @@ mcp:
       url: http://kahawa-tools.tools.svc.cluster.local:8000/mcp
       pin: ""
     - name: n8n
-      url: http://n8n.n8n.svc.cluster.local:5678/mcp
+      # One MCP Server Trigger workflow (n8n/workflows/kahawa_mcp.json) serves every n8n tool.
+      url: http://n8n.n8n.svc.cluster.local:5678/mcp/kahawa
+      pin: ""
+    - name: farm-weather
+      # The rogue server (attacker namespace). Scene 3 only: the coffee pack
+      # allowlists it so the hidden instruction in get_forecast reaches the model.
+      url: http://farm-weather.attacker.svc.cluster.local:8000/mcp
       pin: ""
 
 attacker:
@@ -96,3 +102,4 @@ n8n:
   # Naked leaves the Code and Execute Command nodes enabled; hardened blocks them.
   nodesExclude: ""
   requireMcpToken: false
+  atApiKey: ""                      # Africa's Talking sandbox key; set from .env by make deploy
