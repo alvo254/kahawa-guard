@@ -11,7 +11,7 @@ image:
 llm:
   provider: mistral                 # mistral | ollama
   mistral:
-    chatModel: mistral-small-latest
+    chatModel: ministral-8b-2512       # free tier: 625k TPM / 3.13 RPS (mistral-small: 20k TPM / 1 RPS -> 429s)
     embedModel: mistral-embed
     guardrailModel: moderation_llm_v2
   ollama:

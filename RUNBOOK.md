@@ -50,6 +50,15 @@ export PROVIDER=mistral       # mistral | ollama
 export GATEWAY_API_VERSION=v1.3.0
 export CILIUM_VERSION=1.20.3
 export CHART=deploy/helm/kahawa-guard
+
+# .env is NOT read by the deployed pod — the Docker image never copies it in,
+# and the Helm chart has no mechanism that reads it either. It's only useful
+# here because it gives every `helm upgrade` below a $MISTRAL_API_KEY to pass
+# through explicitly with --set-string. Without this, MISTRAL_API_KEY renders
+# as an empty string and every Mistral call fails with
+# "Illegal header value b'Bearer '" — found the hard way; see
+# NETWORKING-POSTMORTEM.md section 7.
+set -a; source .env; set +a
 ```
 
 `PROFILE`, `PACK` and `PROVIDER` are the three axes the `values-*.yaml` files
@@ -246,7 +255,8 @@ whenever you edit a pack, a prompt, `nginx.conf` or `schema.sql`.
 ```bash
 helm upgrade --install kahawa "$CHART" \
   -f "$CHART/values.yaml" -f "$CHART/values-${PROFILE}.yaml" \
-  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER"
+  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER" \
+  --set-string llm.mistral.apiKey="$MISTRAL_API_KEY"
 ```
 
 Watch everything come up:
@@ -357,7 +367,8 @@ block (`packs/coffee.yaml`, etc.), then redeploy so the gateway enforces them:
 ```bash
 helm upgrade --install kahawa "$CHART" \
   -f "$CHART/values.yaml" -f "$CHART/values-${PROFILE}.yaml" \
-  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER"
+  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER" \
+  --set-string llm.mistral.apiKey="$MISTRAL_API_KEY"
 ```
 
 Check with `./scripts/mcp-pin.sh check http://localhost:8001/mcp http://localhost:8100/mcp`
@@ -403,7 +414,8 @@ kubectl apply -R -f deploy/policies/kyverno
 # 2. Redeploy with the hardened profile
 helm upgrade --install kahawa "$CHART" \
   -f "$CHART/values.yaml" -f "$CHART/values-hardened.yaml" \
-  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER"
+  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER" \
+  --set-string llm.mistral.apiKey="$MISTRAL_API_KEY"
 
 # 3. Network policy — default deny, FQDN/L7 egress rules, plus the provider-specific rule
 kubectl apply -f deploy/policies/cilium/
@@ -439,7 +451,8 @@ kubectl delete -R -f deploy/policies/tetragon --ignore-not-found
 
 helm upgrade --install kahawa "$CHART" \
   -f "$CHART/values.yaml" -f "$CHART/values-naked.yaml" \
-  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER"
+  --set pack="$PACK" --set image.tag="$TAG" --set llm.provider="$PROVIDER" \
+  --set-string llm.mistral.apiKey="$MISTRAL_API_KEY"
 ```
 
 ## 15. Switch the model provider to a local Ollama (optional)

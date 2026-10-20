@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # --- model provider ---
     llm_provider: str = "mistral"          # mistral | ollama
     mistral_api_key: str = ""
-    mistral_chat_model: str = "mistral-small-latest"
+    mistral_chat_model: str = "ministral-8b-2512"
     mistral_embed_model: str = "mistral-embed"
     mistral_base_url: str = "https://api.mistral.ai"
     guardrail_model: str = "moderation_llm_v2"

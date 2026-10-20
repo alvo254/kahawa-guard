@@ -18,7 +18,10 @@ Read `kahawa-guard-technical-guide.md` for how every layer is built, and
 instead of `make`, for the first run, for teaching, or for debugging — it
 assumes native Linux. **On a Mac, start with `RUNBOOK-MAC.md` instead**: it
 gets you from a Mac terminal into a real Linux shell via OrbStack, then hands
-off to `RUNBOOK.md`.
+off to `RUNBOOK.md`. `NETWORKING-POSTMORTEM.md` covers the specific cluster
+networking failures hit during the first real bring-up (Cilium config
+conflicts, a stuck OrbStack DNS proxy, the Postgres image's apt failures) and
+exactly what fixed each one.
 
 > Every member, plot, dealer, payment and document in this repo is invented.
 > The forest fixture is hand-drawn, not real map data. The attacker namespace and
