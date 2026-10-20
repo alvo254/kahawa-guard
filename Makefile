@@ -90,10 +90,20 @@ stage: ## Copy packs, prompts and the files the chart embeds into the chart dir
 	@mkdir -p $(CHART)/files
 	@cp ui/nginx.conf data/schema.sql $(CHART)/files/
 
+# The chart re-renders kahawa-secrets from values on every upgrade, so the key
+# must be passed each time or it is wiped (NETWORKING-POSTMORTEM.md section 7).
+# It comes from $MISTRAL_API_KEY, else .env, via --set-file to dodge --set parsing.
 deploy: stage ## Deploy the chart for PROFILE, PACK and PROVIDER
+	@set -e; keyfile=$$(mktemp); trap 'rm -f "$$keyfile"' EXIT; \
+	if [ -n "$$MISTRAL_API_KEY" ]; then printf '%s' "$$MISTRAL_API_KEY"; \
+	elif [ -f .env ]; then sed -n 's/^MISTRAL_API_KEY=//p' .env | tr -d "\"' \r\n"; fi > "$$keyfile"; \
+	if [ "$(PROVIDER)" = mistral ] && [ ! -s "$$keyfile" ]; then \
+	  echo "MISTRAL_API_KEY is empty (not in env or .env); refusing to deploy a blank key" >&2; exit 1; fi; \
+	echo "helm upgrade --install kahawa $(CHART) (profile=$(PROFILE) pack=$(PACK) provider=$(PROVIDER), key from env/.env)"; \
 	helm upgrade --install kahawa $(CHART) \
 	  -f $(CHART)/values.yaml -f $(CHART)/values-$(PROFILE).yaml \
-	  --set pack=$(PACK) --set image.tag=$(TAG) --set llm.provider=$(PROVIDER)
+	  --set pack=$(PACK) --set image.tag=$(TAG) --set llm.provider=$(PROVIDER) \
+	  --set-file llm.mistral.apiKey="$$keyfile"
 
 ollama: ## Pull the local chat and embedding models into Ollama
 	ollama pull $(OLLAMA_CHAT_MODEL)

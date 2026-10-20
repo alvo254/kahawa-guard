@@ -15,6 +15,10 @@ spec:
       labels:
         app: gateway
         {{- include "kahawa.labels" . | nindent 8 }}
+      annotations:
+        # Env from secretKeyRef is only read at pod start; roll the pod whenever the
+        # rendered Secret changes, or a new API key never reaches the running gateway.
+        checksum/secrets: {{ include (print $.Template.BasePath "/common/secrets.yaml") . | sha256sum }}
     spec:
       serviceAccountName: gateway
       automountServiceAccountToken: {{ .Values.security.automountServiceAccountToken }}
