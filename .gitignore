@@ -22,5 +22,6 @@ deploy/helm/kahawa-guard/files/
 kind
 PROGRESS.md
 SCENE3-ATTACK.md
+ARCHITECTURE.md
 
 

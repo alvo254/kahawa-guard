@@ -1,57 +1,65 @@
-import { useCallback, useEffect, useState } from "react";
-import PhoneChat from "./components/PhoneChat";
-import AdminPanel from "./components/AdminPanel";
-import { fetchAdminState, subscribeVerdicts } from "./lib/api";
-import type { AdminState, ChatResponse, PendingSummary, Verdict } from "./lib/api";
+// Route map. Three trees behind one Service/proxy (ui/NOTES.md §5, §7):
+//   member (public)  /  /services  /about
+//   operator (gated) /ops           — lazy chunk, telemetry lives here
+//   presenter        /present       — lazy chunk
+// Ops and presenter are React.lazy, so their code (and lib/ops, the verdict
+// stream) ships in separate chunks the member surface never requests.
 
-const DEFAULT_PHONE = "+254700000001";
-const ADMIN_TOKEN = (import.meta.env.VITE_ADMIN_TOKEN as string | undefined) ?? "";
+import { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { MemberLayout } from "./member/MemberLayout";
+import { Home } from "./member/Home";
+import { About } from "./member/About";
+import { Services } from "./member/Services";
+import { Spinner } from "./ui/primitives";
+
+const OpsConsole = lazy(() => import("./ops/OpsConsole").then((m) => ({ default: m.OpsConsole })));
+const OpsGate = lazy(() => import("./ops/OpsGate").then((m) => ({ default: m.OpsGate })));
+const Presenter = lazy(() => import("./present/Presenter").then((m) => ({ default: m.Presenter })));
+
+function Loading() {
+  return (
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <Spinner label="Loading…" />
+    </div>
+  );
+}
 
 export default function App() {
-  const [adminState, setAdminState] = useState<AdminState | null>(null);
-  const [verdicts, setVerdicts] = useState<Verdict[]>([]);
-  const [pending, setPending] = useState<PendingSummary[]>([]);
-
-  const refreshState = useCallback(() => {
-    fetchAdminState().then(setAdminState).catch(() => undefined);
-  }, []);
-
-  useEffect(() => {
-    refreshState();
-    const unsubscribe = subscribeVerdicts((v) => {
-      setVerdicts((prev) => [...prev.slice(-199), v]);
-      // Every chat re-checks the MCP pins; pull fresh server state so the
-      // panel does not keep showing what was true at page load.
-      if (v.layer === "mcp_pin") refreshState();
-    });
-    return unsubscribe;
-  }, [refreshState]);
-
-  function handleChatResponse(resp: ChatResponse) {
-    setPending(resp.pending);
-  }
-
-  function handlePendingChanged(actionId: string) {
-    setPending((prev) => prev.filter((p) => p.action_id !== actionId));
-  }
-
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <h1>Kahawa Guard</h1>
-        <p>A guarded assistant for a Kenyan coffee cooperative — watch what each layer stops.</p>
-      </header>
-      <main className="app-main">
-        <PhoneChat defaultPhone={DEFAULT_PHONE} onResponse={handleChatResponse} />
-        <AdminPanel
-          state={adminState}
-          verdicts={verdicts}
-          pending={pending}
-          adminToken={ADMIN_TOKEN}
-          onStateChanged={refreshState}
-          onPendingChanged={handlePendingChanged}
+    <BrowserRouter>
+      <Routes>
+        {/* member surface */}
+        <Route element={<MemberLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
+        </Route>
+
+        {/* operator console, behind the gate */}
+        <Route
+          path="/ops"
+          element={
+            <Suspense fallback={<Loading />}>
+              <OpsGate>
+                <OpsConsole />
+              </OpsGate>
+            </Suspense>
+          }
         />
-      </main>
-    </div>
+
+        {/* presenter mode */}
+        <Route
+          path="/present"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Presenter />
+            </Suspense>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
