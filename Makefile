@@ -20,9 +20,10 @@ ver = $(if $(1),--version $(1),)
 .DEFAULT_GOAL := help
 
 .PHONY: help prereqs up down cluster platform cilium tetragon kyverno secrets \
-	        images load stage deploy naked harden swap reset ui hubble inspector events \
+	        images load stage deploy naked harden vault-seed swap reset ui hubble inspector events events-all events-3c \
 	        ollama forward reload mcp-forward mcp-list mcp-tui mcp-test mcp-pin mcp-check \
-	        scene1 scene2 scene3 scene3-rugpull scene3b scene3c scene4 prove-admission redteam
+	        scene1 scene2 scene3 scene3-rugpull scene3b scene3c scene4 scene5 scene6 scene7 \
+	        prove-admission redteam
 
 help: ## List targets
 	@grep -hE '^[a-zA-Z0-9_-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*## "}{printf "  %-16s %s\n",$$1,$$2}'
@@ -115,20 +116,27 @@ stage: ## Copy packs, prompts and the files the chart embeds into the chart dir
 # must be passed each time or it is wiped (NETWORKING-POSTMORTEM.md section 7).
 # It comes from $MISTRAL_API_KEY, else .env, via --set-file to dodge --set parsing.
 deploy: stage ## Deploy the chart for PROFILE, PACK and PROVIDER
-	@set -e; keyfile=$$(mktemp); atfile=$$(mktemp); trap 'rm -f "$$keyfile" "$$atfile"' EXIT; \
-	if [ -n "$$MISTRAL_API_KEY" ]; then printf '%s' "$$MISTRAL_API_KEY"; \
-	elif [ -f .env ]; then sed -n 's/^MISTRAL_API_KEY=//p' .env | tr -d "\"' \r\n"; fi > "$$keyfile"; \
-	if [ -n "$$AT_API_KEY" ]; then printf '%s' "$$AT_API_KEY"; \
-	elif [ -f .env ]; then sed -n 's/^AT_API_KEY=//p' .env | tr -d "\"' \r\n"; fi > "$$atfile"; \
+	@set -e; keyfile=$$(mktemp); atfile=$$(mktemp); mcpfile=$$(mktemp); adminfile=$$(mktemp); \
+	trap 'rm -f "$$keyfile" "$$atfile" "$$mcpfile" "$$adminfile"' EXIT; \
+	envkey() { v=$$(eval echo \$$$$1); if [ -n "$$v" ]; then printf '%s' "$$v"; \
+	  elif [ -f .env ]; then sed -n "s/^$$1=//p" .env | tr -d "\"' \r\n"; fi; }; \
+	envkey MISTRAL_API_KEY > "$$keyfile"; \
+	envkey AT_API_KEY      > "$$atfile"; \
+	envkey N8N_MCP_TOKEN   > "$$mcpfile"; \
+	envkey ADMIN_TOKEN     > "$$adminfile"; \
 	if [ "$(PROVIDER)" = mistral ] && [ ! -s "$$keyfile" ]; then \
 	  echo "MISTRAL_API_KEY is empty (not in env or .env); refusing to deploy a blank key" >&2; exit 1; fi; \
 	echo "helm upgrade --install kahawa $(CHART) (profile=$(PROFILE) pack=$(PACK) provider=$(PROVIDER), key from env/.env)"; \
+	extra=""; \
+	[ -s "$$mcpfile" ]   && extra="$$extra --set-file n8n.mcpToken=$$mcpfile"; \
+	[ -s "$$adminfile" ] && extra="$$extra --set-file adminToken=$$adminfile"; \
 	helm upgrade --install kahawa $(CHART) \
 	  -f $(CHART)/values.yaml -f $(CHART)/values-$(PROFILE).yaml \
 	  --set pack=$(PACK) --set image.tag=$(TAG) --set llm.provider=$(PROVIDER) \
 	  --set attacker.farmWeather.rugPull=$(RUG_PULL) \
 	  --set-file llm.mistral.apiKey="$$keyfile" \
 	  --set-file n8n.atApiKey="$$atfile" \
+	  $$extra \
 	  --wait --timeout 5m
 
 ollama: ## Pull the local chat and embedding models into Ollama
@@ -149,6 +157,24 @@ harden: ## Apply admission policies, redeploy hardened, then network and runtime
 	kubectl apply -f deploy/policies/cilium/providers/$(PROVIDER).yaml
 	kubectl apply -R -f deploy/policies/tetragon
 	kubectl get pods -A -l app.kubernetes.io/part-of=kahawa-guard
+
+vault-seed: ## Seed Vault for the hardened profile (needs N8N_MCP_TOKEN + ADMIN_TOKEN set)
+	@set -e; \
+	mk=$$MISTRAL_API_KEY; [ -n "$$mk" ] || mk=$$(sed -n 's/^MISTRAL_API_KEY=//p' .env 2>/dev/null | tr -d "\"' \r\n"); \
+	if [ -z "$$mk" ]; then echo "MISTRAL_API_KEY not set (env or .env)" >&2; exit 1; fi; \
+	if [ -z "$$N8N_MCP_TOKEN" ] || [ -z "$$ADMIN_TOKEN" ]; then \
+	  echo "set N8N_MCP_TOKEN and ADMIN_TOKEN first, e.g.:" >&2; \
+	  echo "  export N8N_MCP_TOKEN=\$$(openssl rand -hex 16) ADMIN_TOKEN=\$$(openssl rand -hex 16)" >&2; \
+	  echo "then re-run: make vault-seed  (and use the SAME values for make harden)" >&2; exit 1; fi; \
+	pod=$$(kubectl -n vault get pod -l app.kubernetes.io/name=vault -o jsonpath='{.items[0].metadata.name}'); \
+	echo "seeding secret/kahawa in Vault ($$pod)"; \
+	kubectl -n vault exec "$$pod" -- sh -c \
+	  "VAULT_TOKEN=root vault kv put secret/kahawa \
+	     mistral_api_key='$$mk' n8n_mcp_token='$$N8N_MCP_TOKEN' \
+	     admin_token='$$ADMIN_TOKEN' shieldstral_api_key=''"; \
+	kubectl -n gateway create secret generic vault-token \
+	  --from-literal=token=root --dry-run=client -o yaml | kubectl apply -f -; \
+	echo "done — now: make harden N8N_MCP_TOKEN=\$$N8N_MCP_TOKEN ADMIN_TOKEN=\$$ADMIN_TOKEN"
 
 swap: ## Change the active pack, e.g. make swap PACK=health
 	./scripts/admin.sh pack $(PACK)
@@ -191,6 +217,15 @@ events: ## Stream Tetragon events for the app namespaces
 	kubectl exec -n kube-system ds/tetragon -c tetragon -- \
 	  tetra getevents -o compact --namespace tools,n8n,gateway
 
+events-all: ## Stream ALL Tetragon events (no namespace filter; catches short-lived killed procs)
+	kubectl exec -n kube-system ds/tetragon -c tetragon -- \
+	  tetra getevents -o compact
+
+events-3c: ## Stream only the Scene 3c kill signal (records-fs server.py SIGKILL / exit 137)
+	@echo "watching for records-fs kills — exit 0 = legit read, exit 137 = SIGKILL by Tetragon"
+	kubectl exec -n kube-system ds/tetragon -c tetragon -- tetra getevents -o compact \
+	  | grep --line-buffered -E 'server\.py|Sigkill|SIGKILL'
+
 scene1: ## Mixed-language jailbreak
 	./scenes/scene1.sh
 scene2: ## Fake Coffee Board circular
@@ -203,8 +238,14 @@ scene3b: ## Agent reaches past the app
 	./scenes/scene3b.sh
 scene3c: ## Untrusted file server escapes its directory, Tetragon stops it
 	./scenes/scene3c.sh
-scene4: ## Laundered plot
+scene4: ## Laundered plot (forest overlap, duplicate claim, clean contrast)
 	./scenes/scene4.sh
+scene5: ## Member PII exfiltration via an injected document
+	./scenes/scene5.sh
+scene6: ## Corporate buyer bank-detail leak via an injected document
+	./scenes/scene6.sh
+scene7: ## Database injection payloads — and why they bounce (parameterized SQL)
+	./scenes/scene7.sh
 
 prove-admission: ## Show Kyverno refusing the old naked pod
 	-kubectl apply -f scenes/naked-pod.yaml

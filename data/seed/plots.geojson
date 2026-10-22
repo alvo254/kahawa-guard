@@ -1,31 +1,8968 @@
 {
-  "type": "FeatureCollection",
-  "name": "plots",
-  "comment": "Invented plots. KG-0003 sits inside the 2020 forest fixture (Scene 4, laundered plot). KG-0004 overlaps KG-0001 (duplicate claim). Everything else is clean.",
-  "features": [
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0001", "gps_accuracy_m": 6.0, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0500,-0.4500],[37.0550,-0.4500],[37.0550,-0.4460],[37.0500,-0.4460],[37.0500,-0.4500]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0002", "gps_accuracy_m": 8.5, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0600,-0.4520],[37.0650,-0.4520],[37.0650,-0.4480],[37.0600,-0.4480],[37.0600,-0.4520]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0003", "gps_accuracy_m": 42.0, "mock_location": true, "note": "inside forest_2020" },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0050,-0.3950],[37.0120,-0.3950],[37.0120,-0.3900],[37.0050,-0.3900],[37.0050,-0.3950]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0004", "gps_accuracy_m": 11.0, "mock_location": false, "note": "overlaps KG-0001" },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0530,-0.4490],[37.0580,-0.4490],[37.0580,-0.4450],[37.0530,-0.4450],[37.0530,-0.4490]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0005", "gps_accuracy_m": 5.0, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0700,-0.4600],[37.0740,-0.4600],[37.0740,-0.4570],[37.0700,-0.4570],[37.0700,-0.4600]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0006", "gps_accuracy_m": 7.5, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0760,-0.4620],[37.0800,-0.4620],[37.0800,-0.4590],[37.0760,-0.4590],[37.0760,-0.4620]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0007", "gps_accuracy_m": 9.0, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0820,-0.4650],[37.0860,-0.4650],[37.0860,-0.4620],[37.0820,-0.4620],[37.0820,-0.4650]]] } },
-    { "type": "Feature",
-      "properties": { "grower_code": "KG-0008", "gps_accuracy_m": 6.5, "mock_location": false },
-      "geometry": { "type": "Polygon", "coordinates": [[[37.0880,-0.4680],[37.0920,-0.4680],[37.0920,-0.4650],[37.0880,-0.4650],[37.0880,-0.4680]]] } }
-  ]
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0001",
+    "gps_accuracy_m": 6.0,
+    "mock_location": false,
+    "note": "overlaps KG-0004"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.05,
+       -0.45
+      ],
+      [
+       37.055,
+       -0.45
+      ],
+      [
+       37.055,
+       -0.446
+      ],
+      [
+       37.05,
+       -0.446
+      ],
+      [
+       37.05,
+       -0.45
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0002",
+    "gps_accuracy_m": 8.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.06,
+       -0.452
+      ],
+      [
+       37.065,
+       -0.452
+      ],
+      [
+       37.065,
+       -0.448
+      ],
+      [
+       37.06,
+       -0.448
+      ],
+      [
+       37.06,
+       -0.452
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0003",
+    "gps_accuracy_m": 42.0,
+    "mock_location": true,
+    "note": "inside forest_2020"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.005,
+       -0.395
+      ],
+      [
+       37.012,
+       -0.395
+      ],
+      [
+       37.012,
+       -0.39
+      ],
+      [
+       37.005,
+       -0.39
+      ],
+      [
+       37.005,
+       -0.395
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0004",
+    "gps_accuracy_m": 11.0,
+    "mock_location": false,
+    "note": "overlaps KG-0001"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.053,
+       -0.449
+      ],
+      [
+       37.058,
+       -0.449
+      ],
+      [
+       37.058,
+       -0.445
+      ],
+      [
+       37.053,
+       -0.445
+      ],
+      [
+       37.053,
+       -0.449
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0005",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.07,
+       -0.46
+      ],
+      [
+       37.074,
+       -0.46
+      ],
+      [
+       37.074,
+       -0.457
+      ],
+      [
+       37.07,
+       -0.457
+      ],
+      [
+       37.07,
+       -0.46
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0006",
+    "gps_accuracy_m": 7.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.076,
+       -0.462
+      ],
+      [
+       37.08,
+       -0.462
+      ],
+      [
+       37.08,
+       -0.459
+      ],
+      [
+       37.076,
+       -0.459
+      ],
+      [
+       37.076,
+       -0.462
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0007",
+    "gps_accuracy_m": 9.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.082,
+       -0.465
+      ],
+      [
+       37.086,
+       -0.465
+      ],
+      [
+       37.086,
+       -0.462
+      ],
+      [
+       37.082,
+       -0.462
+      ],
+      [
+       37.082,
+       -0.465
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0008",
+    "gps_accuracy_m": 6.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.088,
+       -0.468
+      ],
+      [
+       37.092,
+       -0.468
+      ],
+      [
+       37.092,
+       -0.465
+      ],
+      [
+       37.088,
+       -0.465
+      ],
+      [
+       37.088,
+       -0.468
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0009",
+    "gps_accuracy_m": 7.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.6
+      ],
+      [
+       37.103,
+       -0.6
+      ],
+      [
+       37.103,
+       -0.597
+      ],
+      [
+       37.1,
+       -0.597
+      ],
+      [
+       37.1,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0010",
+    "gps_accuracy_m": 9.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.6
+      ],
+      [
+       37.109,
+       -0.6
+      ],
+      [
+       37.109,
+       -0.597
+      ],
+      [
+       37.106,
+       -0.597
+      ],
+      [
+       37.106,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0011",
+    "gps_accuracy_m": 10.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.6
+      ],
+      [
+       37.115,
+       -0.6
+      ],
+      [
+       37.115,
+       -0.597
+      ],
+      [
+       37.112,
+       -0.597
+      ],
+      [
+       37.112,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0012",
+    "gps_accuracy_m": 4.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.6
+      ],
+      [
+       37.121,
+       -0.6
+      ],
+      [
+       37.121,
+       -0.597
+      ],
+      [
+       37.118,
+       -0.597
+      ],
+      [
+       37.118,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0013",
+    "gps_accuracy_m": 7.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.6
+      ],
+      [
+       37.127,
+       -0.6
+      ],
+      [
+       37.127,
+       -0.597
+      ],
+      [
+       37.124,
+       -0.597
+      ],
+      [
+       37.124,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0014",
+    "gps_accuracy_m": 12.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.6
+      ],
+      [
+       37.133,
+       -0.6
+      ],
+      [
+       37.133,
+       -0.597
+      ],
+      [
+       37.13,
+       -0.597
+      ],
+      [
+       37.13,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0015",
+    "gps_accuracy_m": 10.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.6
+      ],
+      [
+       37.139,
+       -0.6
+      ],
+      [
+       37.139,
+       -0.597
+      ],
+      [
+       37.136,
+       -0.597
+      ],
+      [
+       37.136,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0016",
+    "gps_accuracy_m": 11.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.6
+      ],
+      [
+       37.145,
+       -0.6
+      ],
+      [
+       37.145,
+       -0.597
+      ],
+      [
+       37.142,
+       -0.597
+      ],
+      [
+       37.142,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0017",
+    "gps_accuracy_m": 10.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.6
+      ],
+      [
+       37.151,
+       -0.6
+      ],
+      [
+       37.151,
+       -0.597
+      ],
+      [
+       37.148,
+       -0.597
+      ],
+      [
+       37.148,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0018",
+    "gps_accuracy_m": 11.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.6
+      ],
+      [
+       37.157000000000004,
+       -0.6
+      ],
+      [
+       37.157000000000004,
+       -0.597
+      ],
+      [
+       37.154,
+       -0.597
+      ],
+      [
+       37.154,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0019",
+    "gps_accuracy_m": 10.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.6
+      ],
+      [
+       37.163000000000004,
+       -0.6
+      ],
+      [
+       37.163000000000004,
+       -0.597
+      ],
+      [
+       37.160000000000004,
+       -0.597
+      ],
+      [
+       37.160000000000004,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0022",
+    "gps_accuracy_m": 13.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.6
+      ],
+      [
+       37.169000000000004,
+       -0.6
+      ],
+      [
+       37.169000000000004,
+       -0.597
+      ],
+      [
+       37.166000000000004,
+       -0.597
+      ],
+      [
+       37.166000000000004,
+       -0.6
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0023",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.594
+      ],
+      [
+       37.103,
+       -0.594
+      ],
+      [
+       37.103,
+       -0.591
+      ],
+      [
+       37.1,
+       -0.591
+      ],
+      [
+       37.1,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0024",
+    "gps_accuracy_m": 11.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.594
+      ],
+      [
+       37.109,
+       -0.594
+      ],
+      [
+       37.109,
+       -0.591
+      ],
+      [
+       37.106,
+       -0.591
+      ],
+      [
+       37.106,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0025",
+    "gps_accuracy_m": 13.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.594
+      ],
+      [
+       37.115,
+       -0.594
+      ],
+      [
+       37.115,
+       -0.591
+      ],
+      [
+       37.112,
+       -0.591
+      ],
+      [
+       37.112,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0026",
+    "gps_accuracy_m": 12.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.594
+      ],
+      [
+       37.121,
+       -0.594
+      ],
+      [
+       37.121,
+       -0.591
+      ],
+      [
+       37.118,
+       -0.591
+      ],
+      [
+       37.118,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0027",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.594
+      ],
+      [
+       37.127,
+       -0.594
+      ],
+      [
+       37.127,
+       -0.591
+      ],
+      [
+       37.124,
+       -0.591
+      ],
+      [
+       37.124,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0028",
+    "gps_accuracy_m": 8.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.594
+      ],
+      [
+       37.133,
+       -0.594
+      ],
+      [
+       37.133,
+       -0.591
+      ],
+      [
+       37.13,
+       -0.591
+      ],
+      [
+       37.13,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0029",
+    "gps_accuracy_m": 13.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.594
+      ],
+      [
+       37.139,
+       -0.594
+      ],
+      [
+       37.139,
+       -0.591
+      ],
+      [
+       37.136,
+       -0.591
+      ],
+      [
+       37.136,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0030",
+    "gps_accuracy_m": 12.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.594
+      ],
+      [
+       37.145,
+       -0.594
+      ],
+      [
+       37.145,
+       -0.591
+      ],
+      [
+       37.142,
+       -0.591
+      ],
+      [
+       37.142,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0031",
+    "gps_accuracy_m": 6.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.594
+      ],
+      [
+       37.151,
+       -0.594
+      ],
+      [
+       37.151,
+       -0.591
+      ],
+      [
+       37.148,
+       -0.591
+      ],
+      [
+       37.148,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0032",
+    "gps_accuracy_m": 9.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.594
+      ],
+      [
+       37.157000000000004,
+       -0.594
+      ],
+      [
+       37.157000000000004,
+       -0.591
+      ],
+      [
+       37.154,
+       -0.591
+      ],
+      [
+       37.154,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0033",
+    "gps_accuracy_m": 12.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.594
+      ],
+      [
+       37.163000000000004,
+       -0.594
+      ],
+      [
+       37.163000000000004,
+       -0.591
+      ],
+      [
+       37.160000000000004,
+       -0.591
+      ],
+      [
+       37.160000000000004,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0034",
+    "gps_accuracy_m": 13.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.594
+      ],
+      [
+       37.169000000000004,
+       -0.594
+      ],
+      [
+       37.169000000000004,
+       -0.591
+      ],
+      [
+       37.166000000000004,
+       -0.591
+      ],
+      [
+       37.166000000000004,
+       -0.594
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0035",
+    "gps_accuracy_m": 10.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.588
+      ],
+      [
+       37.103,
+       -0.588
+      ],
+      [
+       37.103,
+       -0.585
+      ],
+      [
+       37.1,
+       -0.585
+      ],
+      [
+       37.1,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0036",
+    "gps_accuracy_m": 5.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.588
+      ],
+      [
+       37.109,
+       -0.588
+      ],
+      [
+       37.109,
+       -0.585
+      ],
+      [
+       37.106,
+       -0.585
+      ],
+      [
+       37.106,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0037",
+    "gps_accuracy_m": 7.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.588
+      ],
+      [
+       37.115,
+       -0.588
+      ],
+      [
+       37.115,
+       -0.585
+      ],
+      [
+       37.112,
+       -0.585
+      ],
+      [
+       37.112,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0038",
+    "gps_accuracy_m": 4.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.588
+      ],
+      [
+       37.121,
+       -0.588
+      ],
+      [
+       37.121,
+       -0.585
+      ],
+      [
+       37.118,
+       -0.585
+      ],
+      [
+       37.118,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0039",
+    "gps_accuracy_m": 11.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.588
+      ],
+      [
+       37.127,
+       -0.588
+      ],
+      [
+       37.127,
+       -0.585
+      ],
+      [
+       37.124,
+       -0.585
+      ],
+      [
+       37.124,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0040",
+    "gps_accuracy_m": 5.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.588
+      ],
+      [
+       37.133,
+       -0.588
+      ],
+      [
+       37.133,
+       -0.585
+      ],
+      [
+       37.13,
+       -0.585
+      ],
+      [
+       37.13,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0041",
+    "gps_accuracy_m": 6.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.588
+      ],
+      [
+       37.139,
+       -0.588
+      ],
+      [
+       37.139,
+       -0.585
+      ],
+      [
+       37.136,
+       -0.585
+      ],
+      [
+       37.136,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0042",
+    "gps_accuracy_m": 7.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.588
+      ],
+      [
+       37.145,
+       -0.588
+      ],
+      [
+       37.145,
+       -0.585
+      ],
+      [
+       37.142,
+       -0.585
+      ],
+      [
+       37.142,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0043",
+    "gps_accuracy_m": 11.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.588
+      ],
+      [
+       37.151,
+       -0.588
+      ],
+      [
+       37.151,
+       -0.585
+      ],
+      [
+       37.148,
+       -0.585
+      ],
+      [
+       37.148,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0044",
+    "gps_accuracy_m": 8.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.588
+      ],
+      [
+       37.157000000000004,
+       -0.588
+      ],
+      [
+       37.157000000000004,
+       -0.585
+      ],
+      [
+       37.154,
+       -0.585
+      ],
+      [
+       37.154,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0045",
+    "gps_accuracy_m": 7.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.588
+      ],
+      [
+       37.163000000000004,
+       -0.588
+      ],
+      [
+       37.163000000000004,
+       -0.585
+      ],
+      [
+       37.160000000000004,
+       -0.585
+      ],
+      [
+       37.160000000000004,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0047",
+    "gps_accuracy_m": 13.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.588
+      ],
+      [
+       37.169000000000004,
+       -0.588
+      ],
+      [
+       37.169000000000004,
+       -0.585
+      ],
+      [
+       37.166000000000004,
+       -0.585
+      ],
+      [
+       37.166000000000004,
+       -0.588
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0048",
+    "gps_accuracy_m": 10.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.582
+      ],
+      [
+       37.103,
+       -0.582
+      ],
+      [
+       37.103,
+       -0.579
+      ],
+      [
+       37.1,
+       -0.579
+      ],
+      [
+       37.1,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0049",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.582
+      ],
+      [
+       37.109,
+       -0.582
+      ],
+      [
+       37.109,
+       -0.579
+      ],
+      [
+       37.106,
+       -0.579
+      ],
+      [
+       37.106,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0050",
+    "gps_accuracy_m": 13.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.582
+      ],
+      [
+       37.115,
+       -0.582
+      ],
+      [
+       37.115,
+       -0.579
+      ],
+      [
+       37.112,
+       -0.579
+      ],
+      [
+       37.112,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0051",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.582
+      ],
+      [
+       37.121,
+       -0.582
+      ],
+      [
+       37.121,
+       -0.579
+      ],
+      [
+       37.118,
+       -0.579
+      ],
+      [
+       37.118,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0052",
+    "gps_accuracy_m": 8.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.582
+      ],
+      [
+       37.127,
+       -0.582
+      ],
+      [
+       37.127,
+       -0.579
+      ],
+      [
+       37.124,
+       -0.579
+      ],
+      [
+       37.124,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0053",
+    "gps_accuracy_m": 8.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.582
+      ],
+      [
+       37.133,
+       -0.582
+      ],
+      [
+       37.133,
+       -0.579
+      ],
+      [
+       37.13,
+       -0.579
+      ],
+      [
+       37.13,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0054",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.582
+      ],
+      [
+       37.139,
+       -0.582
+      ],
+      [
+       37.139,
+       -0.579
+      ],
+      [
+       37.136,
+       -0.579
+      ],
+      [
+       37.136,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0055",
+    "gps_accuracy_m": 12.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.582
+      ],
+      [
+       37.145,
+       -0.582
+      ],
+      [
+       37.145,
+       -0.579
+      ],
+      [
+       37.142,
+       -0.579
+      ],
+      [
+       37.142,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0056",
+    "gps_accuracy_m": 14.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.582
+      ],
+      [
+       37.151,
+       -0.582
+      ],
+      [
+       37.151,
+       -0.579
+      ],
+      [
+       37.148,
+       -0.579
+      ],
+      [
+       37.148,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0057",
+    "gps_accuracy_m": 13.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.582
+      ],
+      [
+       37.157000000000004,
+       -0.582
+      ],
+      [
+       37.157000000000004,
+       -0.579
+      ],
+      [
+       37.154,
+       -0.579
+      ],
+      [
+       37.154,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0058",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.582
+      ],
+      [
+       37.163000000000004,
+       -0.582
+      ],
+      [
+       37.163000000000004,
+       -0.579
+      ],
+      [
+       37.160000000000004,
+       -0.579
+      ],
+      [
+       37.160000000000004,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0059",
+    "gps_accuracy_m": 6.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.582
+      ],
+      [
+       37.169000000000004,
+       -0.582
+      ],
+      [
+       37.169000000000004,
+       -0.579
+      ],
+      [
+       37.166000000000004,
+       -0.579
+      ],
+      [
+       37.166000000000004,
+       -0.582
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0060",
+    "gps_accuracy_m": 11.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.576
+      ],
+      [
+       37.103,
+       -0.576
+      ],
+      [
+       37.103,
+       -0.573
+      ],
+      [
+       37.1,
+       -0.573
+      ],
+      [
+       37.1,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0061",
+    "gps_accuracy_m": 10.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.576
+      ],
+      [
+       37.109,
+       -0.576
+      ],
+      [
+       37.109,
+       -0.573
+      ],
+      [
+       37.106,
+       -0.573
+      ],
+      [
+       37.106,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0062",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.576
+      ],
+      [
+       37.115,
+       -0.576
+      ],
+      [
+       37.115,
+       -0.573
+      ],
+      [
+       37.112,
+       -0.573
+      ],
+      [
+       37.112,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0064",
+    "gps_accuracy_m": 14.8,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.576
+      ],
+      [
+       37.121,
+       -0.576
+      ],
+      [
+       37.121,
+       -0.573
+      ],
+      [
+       37.118,
+       -0.573
+      ],
+      [
+       37.118,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0065",
+    "gps_accuracy_m": 13.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.576
+      ],
+      [
+       37.127,
+       -0.576
+      ],
+      [
+       37.127,
+       -0.573
+      ],
+      [
+       37.124,
+       -0.573
+      ],
+      [
+       37.124,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0067",
+    "gps_accuracy_m": 14.6,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.576
+      ],
+      [
+       37.133,
+       -0.576
+      ],
+      [
+       37.133,
+       -0.573
+      ],
+      [
+       37.13,
+       -0.573
+      ],
+      [
+       37.13,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0068",
+    "gps_accuracy_m": 12.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.576
+      ],
+      [
+       37.139,
+       -0.576
+      ],
+      [
+       37.139,
+       -0.573
+      ],
+      [
+       37.136,
+       -0.573
+      ],
+      [
+       37.136,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0069",
+    "gps_accuracy_m": 13.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.576
+      ],
+      [
+       37.145,
+       -0.576
+      ],
+      [
+       37.145,
+       -0.573
+      ],
+      [
+       37.142,
+       -0.573
+      ],
+      [
+       37.142,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0070",
+    "gps_accuracy_m": 7.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.576
+      ],
+      [
+       37.151,
+       -0.576
+      ],
+      [
+       37.151,
+       -0.573
+      ],
+      [
+       37.148,
+       -0.573
+      ],
+      [
+       37.148,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0071",
+    "gps_accuracy_m": 4.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.576
+      ],
+      [
+       37.157000000000004,
+       -0.576
+      ],
+      [
+       37.157000000000004,
+       -0.573
+      ],
+      [
+       37.154,
+       -0.573
+      ],
+      [
+       37.154,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0072",
+    "gps_accuracy_m": 14.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.576
+      ],
+      [
+       37.163000000000004,
+       -0.576
+      ],
+      [
+       37.163000000000004,
+       -0.573
+      ],
+      [
+       37.160000000000004,
+       -0.573
+      ],
+      [
+       37.160000000000004,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0073",
+    "gps_accuracy_m": 12.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.576
+      ],
+      [
+       37.169000000000004,
+       -0.576
+      ],
+      [
+       37.169000000000004,
+       -0.573
+      ],
+      [
+       37.166000000000004,
+       -0.573
+      ],
+      [
+       37.166000000000004,
+       -0.576
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0074",
+    "gps_accuracy_m": 6.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.57
+      ],
+      [
+       37.103,
+       -0.57
+      ],
+      [
+       37.103,
+       -0.567
+      ],
+      [
+       37.1,
+       -0.567
+      ],
+      [
+       37.1,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0075",
+    "gps_accuracy_m": 10.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.57
+      ],
+      [
+       37.109,
+       -0.57
+      ],
+      [
+       37.109,
+       -0.567
+      ],
+      [
+       37.106,
+       -0.567
+      ],
+      [
+       37.106,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0076",
+    "gps_accuracy_m": 5.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.57
+      ],
+      [
+       37.115,
+       -0.57
+      ],
+      [
+       37.115,
+       -0.567
+      ],
+      [
+       37.112,
+       -0.567
+      ],
+      [
+       37.112,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0077",
+    "gps_accuracy_m": 12.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.57
+      ],
+      [
+       37.121,
+       -0.57
+      ],
+      [
+       37.121,
+       -0.567
+      ],
+      [
+       37.118,
+       -0.567
+      ],
+      [
+       37.118,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0078",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.57
+      ],
+      [
+       37.127,
+       -0.57
+      ],
+      [
+       37.127,
+       -0.567
+      ],
+      [
+       37.124,
+       -0.567
+      ],
+      [
+       37.124,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0079",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.57
+      ],
+      [
+       37.133,
+       -0.57
+      ],
+      [
+       37.133,
+       -0.567
+      ],
+      [
+       37.13,
+       -0.567
+      ],
+      [
+       37.13,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0080",
+    "gps_accuracy_m": 5.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.57
+      ],
+      [
+       37.139,
+       -0.57
+      ],
+      [
+       37.139,
+       -0.567
+      ],
+      [
+       37.136,
+       -0.567
+      ],
+      [
+       37.136,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0081",
+    "gps_accuracy_m": 13.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.57
+      ],
+      [
+       37.145,
+       -0.57
+      ],
+      [
+       37.145,
+       -0.567
+      ],
+      [
+       37.142,
+       -0.567
+      ],
+      [
+       37.142,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0082",
+    "gps_accuracy_m": 14.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.57
+      ],
+      [
+       37.151,
+       -0.57
+      ],
+      [
+       37.151,
+       -0.567
+      ],
+      [
+       37.148,
+       -0.567
+      ],
+      [
+       37.148,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0083",
+    "gps_accuracy_m": 13.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.57
+      ],
+      [
+       37.157000000000004,
+       -0.57
+      ],
+      [
+       37.157000000000004,
+       -0.567
+      ],
+      [
+       37.154,
+       -0.567
+      ],
+      [
+       37.154,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0084",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.57
+      ],
+      [
+       37.163000000000004,
+       -0.57
+      ],
+      [
+       37.163000000000004,
+       -0.567
+      ],
+      [
+       37.160000000000004,
+       -0.567
+      ],
+      [
+       37.160000000000004,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0086",
+    "gps_accuracy_m": 7.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.57
+      ],
+      [
+       37.169000000000004,
+       -0.57
+      ],
+      [
+       37.169000000000004,
+       -0.567
+      ],
+      [
+       37.166000000000004,
+       -0.567
+      ],
+      [
+       37.166000000000004,
+       -0.57
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0088",
+    "gps_accuracy_m": 5.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.564
+      ],
+      [
+       37.103,
+       -0.564
+      ],
+      [
+       37.103,
+       -0.5609999999999999
+      ],
+      [
+       37.1,
+       -0.5609999999999999
+      ],
+      [
+       37.1,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0091",
+    "gps_accuracy_m": 5.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.564
+      ],
+      [
+       37.109,
+       -0.564
+      ],
+      [
+       37.109,
+       -0.5609999999999999
+      ],
+      [
+       37.106,
+       -0.5609999999999999
+      ],
+      [
+       37.106,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0092",
+    "gps_accuracy_m": 14.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.564
+      ],
+      [
+       37.115,
+       -0.564
+      ],
+      [
+       37.115,
+       -0.5609999999999999
+      ],
+      [
+       37.112,
+       -0.5609999999999999
+      ],
+      [
+       37.112,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0093",
+    "gps_accuracy_m": 9.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.564
+      ],
+      [
+       37.121,
+       -0.564
+      ],
+      [
+       37.121,
+       -0.5609999999999999
+      ],
+      [
+       37.118,
+       -0.5609999999999999
+      ],
+      [
+       37.118,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0094",
+    "gps_accuracy_m": 8.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.564
+      ],
+      [
+       37.127,
+       -0.564
+      ],
+      [
+       37.127,
+       -0.5609999999999999
+      ],
+      [
+       37.124,
+       -0.5609999999999999
+      ],
+      [
+       37.124,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0096",
+    "gps_accuracy_m": 11.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.564
+      ],
+      [
+       37.133,
+       -0.564
+      ],
+      [
+       37.133,
+       -0.5609999999999999
+      ],
+      [
+       37.13,
+       -0.5609999999999999
+      ],
+      [
+       37.13,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0097",
+    "gps_accuracy_m": 12.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.564
+      ],
+      [
+       37.139,
+       -0.564
+      ],
+      [
+       37.139,
+       -0.5609999999999999
+      ],
+      [
+       37.136,
+       -0.5609999999999999
+      ],
+      [
+       37.136,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0098",
+    "gps_accuracy_m": 13.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.564
+      ],
+      [
+       37.145,
+       -0.564
+      ],
+      [
+       37.145,
+       -0.5609999999999999
+      ],
+      [
+       37.142,
+       -0.5609999999999999
+      ],
+      [
+       37.142,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0099",
+    "gps_accuracy_m": 4.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.564
+      ],
+      [
+       37.151,
+       -0.564
+      ],
+      [
+       37.151,
+       -0.5609999999999999
+      ],
+      [
+       37.148,
+       -0.5609999999999999
+      ],
+      [
+       37.148,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0100",
+    "gps_accuracy_m": 11.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.564
+      ],
+      [
+       37.157000000000004,
+       -0.564
+      ],
+      [
+       37.157000000000004,
+       -0.5609999999999999
+      ],
+      [
+       37.154,
+       -0.5609999999999999
+      ],
+      [
+       37.154,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0101",
+    "gps_accuracy_m": 4.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.564
+      ],
+      [
+       37.163000000000004,
+       -0.564
+      ],
+      [
+       37.163000000000004,
+       -0.5609999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5609999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0102",
+    "gps_accuracy_m": 10.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.564
+      ],
+      [
+       37.169000000000004,
+       -0.564
+      ],
+      [
+       37.169000000000004,
+       -0.5609999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5609999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.564
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0104",
+    "gps_accuracy_m": 5.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5579999999999999
+      ],
+      [
+       37.103,
+       -0.5579999999999999
+      ],
+      [
+       37.103,
+       -0.5549999999999999
+      ],
+      [
+       37.1,
+       -0.5549999999999999
+      ],
+      [
+       37.1,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0105",
+    "gps_accuracy_m": 8.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5579999999999999
+      ],
+      [
+       37.109,
+       -0.5579999999999999
+      ],
+      [
+       37.109,
+       -0.5549999999999999
+      ],
+      [
+       37.106,
+       -0.5549999999999999
+      ],
+      [
+       37.106,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0106",
+    "gps_accuracy_m": 11.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5579999999999999
+      ],
+      [
+       37.115,
+       -0.5579999999999999
+      ],
+      [
+       37.115,
+       -0.5549999999999999
+      ],
+      [
+       37.112,
+       -0.5549999999999999
+      ],
+      [
+       37.112,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0107",
+    "gps_accuracy_m": 10.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5579999999999999
+      ],
+      [
+       37.121,
+       -0.5579999999999999
+      ],
+      [
+       37.121,
+       -0.5549999999999999
+      ],
+      [
+       37.118,
+       -0.5549999999999999
+      ],
+      [
+       37.118,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0108",
+    "gps_accuracy_m": 15.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5579999999999999
+      ],
+      [
+       37.127,
+       -0.5579999999999999
+      ],
+      [
+       37.127,
+       -0.5549999999999999
+      ],
+      [
+       37.124,
+       -0.5549999999999999
+      ],
+      [
+       37.124,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0110",
+    "gps_accuracy_m": 7.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5579999999999999
+      ],
+      [
+       37.133,
+       -0.5579999999999999
+      ],
+      [
+       37.133,
+       -0.5549999999999999
+      ],
+      [
+       37.13,
+       -0.5549999999999999
+      ],
+      [
+       37.13,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0111",
+    "gps_accuracy_m": 9.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5579999999999999
+      ],
+      [
+       37.139,
+       -0.5579999999999999
+      ],
+      [
+       37.139,
+       -0.5549999999999999
+      ],
+      [
+       37.136,
+       -0.5549999999999999
+      ],
+      [
+       37.136,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0112",
+    "gps_accuracy_m": 12.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5579999999999999
+      ],
+      [
+       37.145,
+       -0.5579999999999999
+      ],
+      [
+       37.145,
+       -0.5549999999999999
+      ],
+      [
+       37.142,
+       -0.5549999999999999
+      ],
+      [
+       37.142,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0113",
+    "gps_accuracy_m": 4.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5579999999999999
+      ],
+      [
+       37.151,
+       -0.5579999999999999
+      ],
+      [
+       37.151,
+       -0.5549999999999999
+      ],
+      [
+       37.148,
+       -0.5549999999999999
+      ],
+      [
+       37.148,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0114",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5579999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5579999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5549999999999999
+      ],
+      [
+       37.154,
+       -0.5549999999999999
+      ],
+      [
+       37.154,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0115",
+    "gps_accuracy_m": 14.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5579999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5579999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5549999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5549999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0117",
+    "gps_accuracy_m": 7.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5579999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5579999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5549999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5549999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5579999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0118",
+    "gps_accuracy_m": 4.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5519999999999999
+      ],
+      [
+       37.103,
+       -0.5519999999999999
+      ],
+      [
+       37.103,
+       -0.5489999999999999
+      ],
+      [
+       37.1,
+       -0.5489999999999999
+      ],
+      [
+       37.1,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0120",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5519999999999999
+      ],
+      [
+       37.109,
+       -0.5519999999999999
+      ],
+      [
+       37.109,
+       -0.5489999999999999
+      ],
+      [
+       37.106,
+       -0.5489999999999999
+      ],
+      [
+       37.106,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0121",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5519999999999999
+      ],
+      [
+       37.115,
+       -0.5519999999999999
+      ],
+      [
+       37.115,
+       -0.5489999999999999
+      ],
+      [
+       37.112,
+       -0.5489999999999999
+      ],
+      [
+       37.112,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0122",
+    "gps_accuracy_m": 5.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5519999999999999
+      ],
+      [
+       37.121,
+       -0.5519999999999999
+      ],
+      [
+       37.121,
+       -0.5489999999999999
+      ],
+      [
+       37.118,
+       -0.5489999999999999
+      ],
+      [
+       37.118,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0123",
+    "gps_accuracy_m": 7.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5519999999999999
+      ],
+      [
+       37.127,
+       -0.5519999999999999
+      ],
+      [
+       37.127,
+       -0.5489999999999999
+      ],
+      [
+       37.124,
+       -0.5489999999999999
+      ],
+      [
+       37.124,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0124",
+    "gps_accuracy_m": 9.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5519999999999999
+      ],
+      [
+       37.133,
+       -0.5519999999999999
+      ],
+      [
+       37.133,
+       -0.5489999999999999
+      ],
+      [
+       37.13,
+       -0.5489999999999999
+      ],
+      [
+       37.13,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0126",
+    "gps_accuracy_m": 12.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5519999999999999
+      ],
+      [
+       37.139,
+       -0.5519999999999999
+      ],
+      [
+       37.139,
+       -0.5489999999999999
+      ],
+      [
+       37.136,
+       -0.5489999999999999
+      ],
+      [
+       37.136,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0127",
+    "gps_accuracy_m": 6.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5519999999999999
+      ],
+      [
+       37.145,
+       -0.5519999999999999
+      ],
+      [
+       37.145,
+       -0.5489999999999999
+      ],
+      [
+       37.142,
+       -0.5489999999999999
+      ],
+      [
+       37.142,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0128",
+    "gps_accuracy_m": 4.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5519999999999999
+      ],
+      [
+       37.151,
+       -0.5519999999999999
+      ],
+      [
+       37.151,
+       -0.5489999999999999
+      ],
+      [
+       37.148,
+       -0.5489999999999999
+      ],
+      [
+       37.148,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0129",
+    "gps_accuracy_m": 10.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5519999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5519999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5489999999999999
+      ],
+      [
+       37.154,
+       -0.5489999999999999
+      ],
+      [
+       37.154,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0131",
+    "gps_accuracy_m": 8.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5519999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5519999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5489999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5489999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0132",
+    "gps_accuracy_m": 7.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5519999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5519999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5489999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5489999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5519999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0133",
+    "gps_accuracy_m": 12.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5459999999999999
+      ],
+      [
+       37.103,
+       -0.5459999999999999
+      ],
+      [
+       37.103,
+       -0.5429999999999999
+      ],
+      [
+       37.1,
+       -0.5429999999999999
+      ],
+      [
+       37.1,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0134",
+    "gps_accuracy_m": 14.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5459999999999999
+      ],
+      [
+       37.109,
+       -0.5459999999999999
+      ],
+      [
+       37.109,
+       -0.5429999999999999
+      ],
+      [
+       37.106,
+       -0.5429999999999999
+      ],
+      [
+       37.106,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0136",
+    "gps_accuracy_m": 12.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5459999999999999
+      ],
+      [
+       37.115,
+       -0.5459999999999999
+      ],
+      [
+       37.115,
+       -0.5429999999999999
+      ],
+      [
+       37.112,
+       -0.5429999999999999
+      ],
+      [
+       37.112,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0138",
+    "gps_accuracy_m": 6.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5459999999999999
+      ],
+      [
+       37.121,
+       -0.5459999999999999
+      ],
+      [
+       37.121,
+       -0.5429999999999999
+      ],
+      [
+       37.118,
+       -0.5429999999999999
+      ],
+      [
+       37.118,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0139",
+    "gps_accuracy_m": 14.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5459999999999999
+      ],
+      [
+       37.127,
+       -0.5459999999999999
+      ],
+      [
+       37.127,
+       -0.5429999999999999
+      ],
+      [
+       37.124,
+       -0.5429999999999999
+      ],
+      [
+       37.124,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0140",
+    "gps_accuracy_m": 7.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5459999999999999
+      ],
+      [
+       37.133,
+       -0.5459999999999999
+      ],
+      [
+       37.133,
+       -0.5429999999999999
+      ],
+      [
+       37.13,
+       -0.5429999999999999
+      ],
+      [
+       37.13,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0141",
+    "gps_accuracy_m": 13.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5459999999999999
+      ],
+      [
+       37.139,
+       -0.5459999999999999
+      ],
+      [
+       37.139,
+       -0.5429999999999999
+      ],
+      [
+       37.136,
+       -0.5429999999999999
+      ],
+      [
+       37.136,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0142",
+    "gps_accuracy_m": 11.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5459999999999999
+      ],
+      [
+       37.145,
+       -0.5459999999999999
+      ],
+      [
+       37.145,
+       -0.5429999999999999
+      ],
+      [
+       37.142,
+       -0.5429999999999999
+      ],
+      [
+       37.142,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0143",
+    "gps_accuracy_m": 6.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5459999999999999
+      ],
+      [
+       37.151,
+       -0.5459999999999999
+      ],
+      [
+       37.151,
+       -0.5429999999999999
+      ],
+      [
+       37.148,
+       -0.5429999999999999
+      ],
+      [
+       37.148,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0144",
+    "gps_accuracy_m": 8.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5459999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5459999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5429999999999999
+      ],
+      [
+       37.154,
+       -0.5429999999999999
+      ],
+      [
+       37.154,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0145",
+    "gps_accuracy_m": 7.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5459999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5459999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5429999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5429999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0146",
+    "gps_accuracy_m": 8.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5459999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5459999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5429999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5429999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5459999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0147",
+    "gps_accuracy_m": 8.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5399999999999999
+      ],
+      [
+       37.103,
+       -0.5399999999999999
+      ],
+      [
+       37.103,
+       -0.5369999999999999
+      ],
+      [
+       37.1,
+       -0.5369999999999999
+      ],
+      [
+       37.1,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0148",
+    "gps_accuracy_m": 11.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5399999999999999
+      ],
+      [
+       37.109,
+       -0.5399999999999999
+      ],
+      [
+       37.109,
+       -0.5369999999999999
+      ],
+      [
+       37.106,
+       -0.5369999999999999
+      ],
+      [
+       37.106,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0151",
+    "gps_accuracy_m": 6.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5399999999999999
+      ],
+      [
+       37.115,
+       -0.5399999999999999
+      ],
+      [
+       37.115,
+       -0.5369999999999999
+      ],
+      [
+       37.112,
+       -0.5369999999999999
+      ],
+      [
+       37.112,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0152",
+    "gps_accuracy_m": 10.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5399999999999999
+      ],
+      [
+       37.121,
+       -0.5399999999999999
+      ],
+      [
+       37.121,
+       -0.5369999999999999
+      ],
+      [
+       37.118,
+       -0.5369999999999999
+      ],
+      [
+       37.118,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0153",
+    "gps_accuracy_m": 9.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5399999999999999
+      ],
+      [
+       37.127,
+       -0.5399999999999999
+      ],
+      [
+       37.127,
+       -0.5369999999999999
+      ],
+      [
+       37.124,
+       -0.5369999999999999
+      ],
+      [
+       37.124,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0154",
+    "gps_accuracy_m": 12.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5399999999999999
+      ],
+      [
+       37.133,
+       -0.5399999999999999
+      ],
+      [
+       37.133,
+       -0.5369999999999999
+      ],
+      [
+       37.13,
+       -0.5369999999999999
+      ],
+      [
+       37.13,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0156",
+    "gps_accuracy_m": 7.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5399999999999999
+      ],
+      [
+       37.139,
+       -0.5399999999999999
+      ],
+      [
+       37.139,
+       -0.5369999999999999
+      ],
+      [
+       37.136,
+       -0.5369999999999999
+      ],
+      [
+       37.136,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0157",
+    "gps_accuracy_m": 4.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5399999999999999
+      ],
+      [
+       37.145,
+       -0.5399999999999999
+      ],
+      [
+       37.145,
+       -0.5369999999999999
+      ],
+      [
+       37.142,
+       -0.5369999999999999
+      ],
+      [
+       37.142,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0158",
+    "gps_accuracy_m": 4.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5399999999999999
+      ],
+      [
+       37.151,
+       -0.5399999999999999
+      ],
+      [
+       37.151,
+       -0.5369999999999999
+      ],
+      [
+       37.148,
+       -0.5369999999999999
+      ],
+      [
+       37.148,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0160",
+    "gps_accuracy_m": 9.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5399999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5399999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5369999999999999
+      ],
+      [
+       37.154,
+       -0.5369999999999999
+      ],
+      [
+       37.154,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0161",
+    "gps_accuracy_m": 11.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5399999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5399999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5369999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5369999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0163",
+    "gps_accuracy_m": 15.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5399999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5399999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5369999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5369999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5399999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0166",
+    "gps_accuracy_m": 6.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5339999999999999
+      ],
+      [
+       37.103,
+       -0.5339999999999999
+      ],
+      [
+       37.103,
+       -0.5309999999999999
+      ],
+      [
+       37.1,
+       -0.5309999999999999
+      ],
+      [
+       37.1,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0167",
+    "gps_accuracy_m": 7.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5339999999999999
+      ],
+      [
+       37.109,
+       -0.5339999999999999
+      ],
+      [
+       37.109,
+       -0.5309999999999999
+      ],
+      [
+       37.106,
+       -0.5309999999999999
+      ],
+      [
+       37.106,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0168",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5339999999999999
+      ],
+      [
+       37.115,
+       -0.5339999999999999
+      ],
+      [
+       37.115,
+       -0.5309999999999999
+      ],
+      [
+       37.112,
+       -0.5309999999999999
+      ],
+      [
+       37.112,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0170",
+    "gps_accuracy_m": 4.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5339999999999999
+      ],
+      [
+       37.121,
+       -0.5339999999999999
+      ],
+      [
+       37.121,
+       -0.5309999999999999
+      ],
+      [
+       37.118,
+       -0.5309999999999999
+      ],
+      [
+       37.118,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0171",
+    "gps_accuracy_m": 7.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5339999999999999
+      ],
+      [
+       37.127,
+       -0.5339999999999999
+      ],
+      [
+       37.127,
+       -0.5309999999999999
+      ],
+      [
+       37.124,
+       -0.5309999999999999
+      ],
+      [
+       37.124,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0172",
+    "gps_accuracy_m": 11.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5339999999999999
+      ],
+      [
+       37.133,
+       -0.5339999999999999
+      ],
+      [
+       37.133,
+       -0.5309999999999999
+      ],
+      [
+       37.13,
+       -0.5309999999999999
+      ],
+      [
+       37.13,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0173",
+    "gps_accuracy_m": 11.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5339999999999999
+      ],
+      [
+       37.139,
+       -0.5339999999999999
+      ],
+      [
+       37.139,
+       -0.5309999999999999
+      ],
+      [
+       37.136,
+       -0.5309999999999999
+      ],
+      [
+       37.136,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0174",
+    "gps_accuracy_m": 4.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5339999999999999
+      ],
+      [
+       37.145,
+       -0.5339999999999999
+      ],
+      [
+       37.145,
+       -0.5309999999999999
+      ],
+      [
+       37.142,
+       -0.5309999999999999
+      ],
+      [
+       37.142,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0175",
+    "gps_accuracy_m": 9.6,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5339999999999999
+      ],
+      [
+       37.151,
+       -0.5339999999999999
+      ],
+      [
+       37.151,
+       -0.5309999999999999
+      ],
+      [
+       37.148,
+       -0.5309999999999999
+      ],
+      [
+       37.148,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0176",
+    "gps_accuracy_m": 14.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5339999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5339999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5309999999999999
+      ],
+      [
+       37.154,
+       -0.5309999999999999
+      ],
+      [
+       37.154,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0177",
+    "gps_accuracy_m": 10.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5339999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5339999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5309999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5309999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0178",
+    "gps_accuracy_m": 11.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5339999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5339999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5309999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5309999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5339999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0179",
+    "gps_accuracy_m": 10.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5279999999999999
+      ],
+      [
+       37.103,
+       -0.5279999999999999
+      ],
+      [
+       37.103,
+       -0.5249999999999999
+      ],
+      [
+       37.1,
+       -0.5249999999999999
+      ],
+      [
+       37.1,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0180",
+    "gps_accuracy_m": 10.3,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5279999999999999
+      ],
+      [
+       37.109,
+       -0.5279999999999999
+      ],
+      [
+       37.109,
+       -0.5249999999999999
+      ],
+      [
+       37.106,
+       -0.5249999999999999
+      ],
+      [
+       37.106,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0181",
+    "gps_accuracy_m": 5.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5279999999999999
+      ],
+      [
+       37.115,
+       -0.5279999999999999
+      ],
+      [
+       37.115,
+       -0.5249999999999999
+      ],
+      [
+       37.112,
+       -0.5249999999999999
+      ],
+      [
+       37.112,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0182",
+    "gps_accuracy_m": 4.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5279999999999999
+      ],
+      [
+       37.121,
+       -0.5279999999999999
+      ],
+      [
+       37.121,
+       -0.5249999999999999
+      ],
+      [
+       37.118,
+       -0.5249999999999999
+      ],
+      [
+       37.118,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0183",
+    "gps_accuracy_m": 10.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5279999999999999
+      ],
+      [
+       37.127,
+       -0.5279999999999999
+      ],
+      [
+       37.127,
+       -0.5249999999999999
+      ],
+      [
+       37.124,
+       -0.5249999999999999
+      ],
+      [
+       37.124,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0185",
+    "gps_accuracy_m": 12.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5279999999999999
+      ],
+      [
+       37.133,
+       -0.5279999999999999
+      ],
+      [
+       37.133,
+       -0.5249999999999999
+      ],
+      [
+       37.13,
+       -0.5249999999999999
+      ],
+      [
+       37.13,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0186",
+    "gps_accuracy_m": 12.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5279999999999999
+      ],
+      [
+       37.139,
+       -0.5279999999999999
+      ],
+      [
+       37.139,
+       -0.5249999999999999
+      ],
+      [
+       37.136,
+       -0.5249999999999999
+      ],
+      [
+       37.136,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0187",
+    "gps_accuracy_m": 4.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5279999999999999
+      ],
+      [
+       37.145,
+       -0.5279999999999999
+      ],
+      [
+       37.145,
+       -0.5249999999999999
+      ],
+      [
+       37.142,
+       -0.5249999999999999
+      ],
+      [
+       37.142,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0188",
+    "gps_accuracy_m": 9.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5279999999999999
+      ],
+      [
+       37.151,
+       -0.5279999999999999
+      ],
+      [
+       37.151,
+       -0.5249999999999999
+      ],
+      [
+       37.148,
+       -0.5249999999999999
+      ],
+      [
+       37.148,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0189",
+    "gps_accuracy_m": 9.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5279999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5279999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5249999999999999
+      ],
+      [
+       37.154,
+       -0.5249999999999999
+      ],
+      [
+       37.154,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0190",
+    "gps_accuracy_m": 4.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5279999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5279999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5249999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5249999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0191",
+    "gps_accuracy_m": 8.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5279999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5279999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5249999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5249999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5279999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0194",
+    "gps_accuracy_m": 4.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5219999999999999
+      ],
+      [
+       37.103,
+       -0.5219999999999999
+      ],
+      [
+       37.103,
+       -0.5189999999999999
+      ],
+      [
+       37.1,
+       -0.5189999999999999
+      ],
+      [
+       37.1,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0195",
+    "gps_accuracy_m": 4.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5219999999999999
+      ],
+      [
+       37.109,
+       -0.5219999999999999
+      ],
+      [
+       37.109,
+       -0.5189999999999999
+      ],
+      [
+       37.106,
+       -0.5189999999999999
+      ],
+      [
+       37.106,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0196",
+    "gps_accuracy_m": 14.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5219999999999999
+      ],
+      [
+       37.115,
+       -0.5219999999999999
+      ],
+      [
+       37.115,
+       -0.5189999999999999
+      ],
+      [
+       37.112,
+       -0.5189999999999999
+      ],
+      [
+       37.112,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0197",
+    "gps_accuracy_m": 13.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5219999999999999
+      ],
+      [
+       37.121,
+       -0.5219999999999999
+      ],
+      [
+       37.121,
+       -0.5189999999999999
+      ],
+      [
+       37.118,
+       -0.5189999999999999
+      ],
+      [
+       37.118,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0198",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5219999999999999
+      ],
+      [
+       37.127,
+       -0.5219999999999999
+      ],
+      [
+       37.127,
+       -0.5189999999999999
+      ],
+      [
+       37.124,
+       -0.5189999999999999
+      ],
+      [
+       37.124,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0199",
+    "gps_accuracy_m": 13.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5219999999999999
+      ],
+      [
+       37.133,
+       -0.5219999999999999
+      ],
+      [
+       37.133,
+       -0.5189999999999999
+      ],
+      [
+       37.13,
+       -0.5189999999999999
+      ],
+      [
+       37.13,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0201",
+    "gps_accuracy_m": 10.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5219999999999999
+      ],
+      [
+       37.139,
+       -0.5219999999999999
+      ],
+      [
+       37.139,
+       -0.5189999999999999
+      ],
+      [
+       37.136,
+       -0.5189999999999999
+      ],
+      [
+       37.136,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0202",
+    "gps_accuracy_m": 10.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5219999999999999
+      ],
+      [
+       37.145,
+       -0.5219999999999999
+      ],
+      [
+       37.145,
+       -0.5189999999999999
+      ],
+      [
+       37.142,
+       -0.5189999999999999
+      ],
+      [
+       37.142,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0203",
+    "gps_accuracy_m": 11.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5219999999999999
+      ],
+      [
+       37.151,
+       -0.5219999999999999
+      ],
+      [
+       37.151,
+       -0.5189999999999999
+      ],
+      [
+       37.148,
+       -0.5189999999999999
+      ],
+      [
+       37.148,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0204",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5219999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5219999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5189999999999999
+      ],
+      [
+       37.154,
+       -0.5189999999999999
+      ],
+      [
+       37.154,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0206",
+    "gps_accuracy_m": 14.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5219999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5219999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5189999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5189999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0207",
+    "gps_accuracy_m": 6.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5219999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5219999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5189999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5189999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5219999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0208",
+    "gps_accuracy_m": 9.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5159999999999999
+      ],
+      [
+       37.103,
+       -0.5159999999999999
+      ],
+      [
+       37.103,
+       -0.5129999999999999
+      ],
+      [
+       37.1,
+       -0.5129999999999999
+      ],
+      [
+       37.1,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0209",
+    "gps_accuracy_m": 9.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5159999999999999
+      ],
+      [
+       37.109,
+       -0.5159999999999999
+      ],
+      [
+       37.109,
+       -0.5129999999999999
+      ],
+      [
+       37.106,
+       -0.5129999999999999
+      ],
+      [
+       37.106,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0210",
+    "gps_accuracy_m": 12.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5159999999999999
+      ],
+      [
+       37.115,
+       -0.5159999999999999
+      ],
+      [
+       37.115,
+       -0.5129999999999999
+      ],
+      [
+       37.112,
+       -0.5129999999999999
+      ],
+      [
+       37.112,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0211",
+    "gps_accuracy_m": 12.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5159999999999999
+      ],
+      [
+       37.121,
+       -0.5159999999999999
+      ],
+      [
+       37.121,
+       -0.5129999999999999
+      ],
+      [
+       37.118,
+       -0.5129999999999999
+      ],
+      [
+       37.118,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0212",
+    "gps_accuracy_m": 8.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5159999999999999
+      ],
+      [
+       37.127,
+       -0.5159999999999999
+      ],
+      [
+       37.127,
+       -0.5129999999999999
+      ],
+      [
+       37.124,
+       -0.5129999999999999
+      ],
+      [
+       37.124,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0213",
+    "gps_accuracy_m": 5.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5159999999999999
+      ],
+      [
+       37.133,
+       -0.5159999999999999
+      ],
+      [
+       37.133,
+       -0.5129999999999999
+      ],
+      [
+       37.13,
+       -0.5129999999999999
+      ],
+      [
+       37.13,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0214",
+    "gps_accuracy_m": 4.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5159999999999999
+      ],
+      [
+       37.139,
+       -0.5159999999999999
+      ],
+      [
+       37.139,
+       -0.5129999999999999
+      ],
+      [
+       37.136,
+       -0.5129999999999999
+      ],
+      [
+       37.136,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0215",
+    "gps_accuracy_m": 7.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5159999999999999
+      ],
+      [
+       37.145,
+       -0.5159999999999999
+      ],
+      [
+       37.145,
+       -0.5129999999999999
+      ],
+      [
+       37.142,
+       -0.5129999999999999
+      ],
+      [
+       37.142,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0216",
+    "gps_accuracy_m": 6.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5159999999999999
+      ],
+      [
+       37.151,
+       -0.5159999999999999
+      ],
+      [
+       37.151,
+       -0.5129999999999999
+      ],
+      [
+       37.148,
+       -0.5129999999999999
+      ],
+      [
+       37.148,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0217",
+    "gps_accuracy_m": 8.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5159999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5159999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5129999999999999
+      ],
+      [
+       37.154,
+       -0.5129999999999999
+      ],
+      [
+       37.154,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0218",
+    "gps_accuracy_m": 5.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5159999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5159999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5129999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5129999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0220",
+    "gps_accuracy_m": 11.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5159999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5159999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5129999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5129999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5159999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0221",
+    "gps_accuracy_m": 13.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5099999999999999
+      ],
+      [
+       37.103,
+       -0.5099999999999999
+      ],
+      [
+       37.103,
+       -0.5069999999999999
+      ],
+      [
+       37.1,
+       -0.5069999999999999
+      ],
+      [
+       37.1,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0222",
+    "gps_accuracy_m": 9.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5099999999999999
+      ],
+      [
+       37.109,
+       -0.5099999999999999
+      ],
+      [
+       37.109,
+       -0.5069999999999999
+      ],
+      [
+       37.106,
+       -0.5069999999999999
+      ],
+      [
+       37.106,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0223",
+    "gps_accuracy_m": 8.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5099999999999999
+      ],
+      [
+       37.115,
+       -0.5099999999999999
+      ],
+      [
+       37.115,
+       -0.5069999999999999
+      ],
+      [
+       37.112,
+       -0.5069999999999999
+      ],
+      [
+       37.112,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0224",
+    "gps_accuracy_m": 12.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5099999999999999
+      ],
+      [
+       37.121,
+       -0.5099999999999999
+      ],
+      [
+       37.121,
+       -0.5069999999999999
+      ],
+      [
+       37.118,
+       -0.5069999999999999
+      ],
+      [
+       37.118,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0226",
+    "gps_accuracy_m": 13.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5099999999999999
+      ],
+      [
+       37.127,
+       -0.5099999999999999
+      ],
+      [
+       37.127,
+       -0.5069999999999999
+      ],
+      [
+       37.124,
+       -0.5069999999999999
+      ],
+      [
+       37.124,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0227",
+    "gps_accuracy_m": 7.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5099999999999999
+      ],
+      [
+       37.133,
+       -0.5099999999999999
+      ],
+      [
+       37.133,
+       -0.5069999999999999
+      ],
+      [
+       37.13,
+       -0.5069999999999999
+      ],
+      [
+       37.13,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0228",
+    "gps_accuracy_m": 9.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5099999999999999
+      ],
+      [
+       37.139,
+       -0.5099999999999999
+      ],
+      [
+       37.139,
+       -0.5069999999999999
+      ],
+      [
+       37.136,
+       -0.5069999999999999
+      ],
+      [
+       37.136,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0229",
+    "gps_accuracy_m": 7.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5099999999999999
+      ],
+      [
+       37.145,
+       -0.5099999999999999
+      ],
+      [
+       37.145,
+       -0.5069999999999999
+      ],
+      [
+       37.142,
+       -0.5069999999999999
+      ],
+      [
+       37.142,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0230",
+    "gps_accuracy_m": 13.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5099999999999999
+      ],
+      [
+       37.151,
+       -0.5099999999999999
+      ],
+      [
+       37.151,
+       -0.5069999999999999
+      ],
+      [
+       37.148,
+       -0.5069999999999999
+      ],
+      [
+       37.148,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0232",
+    "gps_accuracy_m": 4.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5099999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5099999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5069999999999999
+      ],
+      [
+       37.154,
+       -0.5069999999999999
+      ],
+      [
+       37.154,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0234",
+    "gps_accuracy_m": 6.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5099999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5099999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5069999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5069999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0235",
+    "gps_accuracy_m": 4.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5099999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5099999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5069999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5069999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5099999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0236",
+    "gps_accuracy_m": 6.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.5039999999999999
+      ],
+      [
+       37.103,
+       -0.5039999999999999
+      ],
+      [
+       37.103,
+       -0.5009999999999999
+      ],
+      [
+       37.1,
+       -0.5009999999999999
+      ],
+      [
+       37.1,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0237",
+    "gps_accuracy_m": 13.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.5039999999999999
+      ],
+      [
+       37.109,
+       -0.5039999999999999
+      ],
+      [
+       37.109,
+       -0.5009999999999999
+      ],
+      [
+       37.106,
+       -0.5009999999999999
+      ],
+      [
+       37.106,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0238",
+    "gps_accuracy_m": 12.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.5039999999999999
+      ],
+      [
+       37.115,
+       -0.5039999999999999
+      ],
+      [
+       37.115,
+       -0.5009999999999999
+      ],
+      [
+       37.112,
+       -0.5009999999999999
+      ],
+      [
+       37.112,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0239",
+    "gps_accuracy_m": 8.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.5039999999999999
+      ],
+      [
+       37.121,
+       -0.5039999999999999
+      ],
+      [
+       37.121,
+       -0.5009999999999999
+      ],
+      [
+       37.118,
+       -0.5009999999999999
+      ],
+      [
+       37.118,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0240",
+    "gps_accuracy_m": 10.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.5039999999999999
+      ],
+      [
+       37.127,
+       -0.5039999999999999
+      ],
+      [
+       37.127,
+       -0.5009999999999999
+      ],
+      [
+       37.124,
+       -0.5009999999999999
+      ],
+      [
+       37.124,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0241",
+    "gps_accuracy_m": 8.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.5039999999999999
+      ],
+      [
+       37.133,
+       -0.5039999999999999
+      ],
+      [
+       37.133,
+       -0.5009999999999999
+      ],
+      [
+       37.13,
+       -0.5009999999999999
+      ],
+      [
+       37.13,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0242",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.5039999999999999
+      ],
+      [
+       37.139,
+       -0.5039999999999999
+      ],
+      [
+       37.139,
+       -0.5009999999999999
+      ],
+      [
+       37.136,
+       -0.5009999999999999
+      ],
+      [
+       37.136,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0243",
+    "gps_accuracy_m": 9.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.5039999999999999
+      ],
+      [
+       37.145,
+       -0.5039999999999999
+      ],
+      [
+       37.145,
+       -0.5009999999999999
+      ],
+      [
+       37.142,
+       -0.5009999999999999
+      ],
+      [
+       37.142,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0246",
+    "gps_accuracy_m": 14.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.5039999999999999
+      ],
+      [
+       37.151,
+       -0.5039999999999999
+      ],
+      [
+       37.151,
+       -0.5009999999999999
+      ],
+      [
+       37.148,
+       -0.5009999999999999
+      ],
+      [
+       37.148,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0247",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.5039999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5039999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.5009999999999999
+      ],
+      [
+       37.154,
+       -0.5009999999999999
+      ],
+      [
+       37.154,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0249",
+    "gps_accuracy_m": 7.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.5039999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5039999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.5009999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5009999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0250",
+    "gps_accuracy_m": 4.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.5039999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5039999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.5009999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5009999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.5039999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0251",
+    "gps_accuracy_m": 8.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.4979999999999999
+      ],
+      [
+       37.103,
+       -0.4979999999999999
+      ],
+      [
+       37.103,
+       -0.4949999999999999
+      ],
+      [
+       37.1,
+       -0.4949999999999999
+      ],
+      [
+       37.1,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0252",
+    "gps_accuracy_m": 14.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.4979999999999999
+      ],
+      [
+       37.109,
+       -0.4979999999999999
+      ],
+      [
+       37.109,
+       -0.4949999999999999
+      ],
+      [
+       37.106,
+       -0.4949999999999999
+      ],
+      [
+       37.106,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0253",
+    "gps_accuracy_m": 13.9,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.4979999999999999
+      ],
+      [
+       37.115,
+       -0.4979999999999999
+      ],
+      [
+       37.115,
+       -0.4949999999999999
+      ],
+      [
+       37.112,
+       -0.4949999999999999
+      ],
+      [
+       37.112,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0255",
+    "gps_accuracy_m": 8.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.4979999999999999
+      ],
+      [
+       37.121,
+       -0.4979999999999999
+      ],
+      [
+       37.121,
+       -0.4949999999999999
+      ],
+      [
+       37.118,
+       -0.4949999999999999
+      ],
+      [
+       37.118,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0256",
+    "gps_accuracy_m": 4.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.4979999999999999
+      ],
+      [
+       37.127,
+       -0.4979999999999999
+      ],
+      [
+       37.127,
+       -0.4949999999999999
+      ],
+      [
+       37.124,
+       -0.4949999999999999
+      ],
+      [
+       37.124,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0258",
+    "gps_accuracy_m": 13.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.4979999999999999
+      ],
+      [
+       37.133,
+       -0.4979999999999999
+      ],
+      [
+       37.133,
+       -0.4949999999999999
+      ],
+      [
+       37.13,
+       -0.4949999999999999
+      ],
+      [
+       37.13,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0259",
+    "gps_accuracy_m": 8.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.4979999999999999
+      ],
+      [
+       37.139,
+       -0.4979999999999999
+      ],
+      [
+       37.139,
+       -0.4949999999999999
+      ],
+      [
+       37.136,
+       -0.4949999999999999
+      ],
+      [
+       37.136,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0260",
+    "gps_accuracy_m": 8.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.4979999999999999
+      ],
+      [
+       37.145,
+       -0.4979999999999999
+      ],
+      [
+       37.145,
+       -0.4949999999999999
+      ],
+      [
+       37.142,
+       -0.4949999999999999
+      ],
+      [
+       37.142,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0261",
+    "gps_accuracy_m": 11.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.4979999999999999
+      ],
+      [
+       37.151,
+       -0.4979999999999999
+      ],
+      [
+       37.151,
+       -0.4949999999999999
+      ],
+      [
+       37.148,
+       -0.4949999999999999
+      ],
+      [
+       37.148,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0262",
+    "gps_accuracy_m": 10.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.4979999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4979999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4949999999999999
+      ],
+      [
+       37.154,
+       -0.4949999999999999
+      ],
+      [
+       37.154,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0263",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.4979999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4979999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4949999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4949999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0265",
+    "gps_accuracy_m": 8.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.4979999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4979999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4949999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4949999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4979999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0266",
+    "gps_accuracy_m": 10.5,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.4919999999999999
+      ],
+      [
+       37.103,
+       -0.4919999999999999
+      ],
+      [
+       37.103,
+       -0.4889999999999999
+      ],
+      [
+       37.1,
+       -0.4889999999999999
+      ],
+      [
+       37.1,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0267",
+    "gps_accuracy_m": 8.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.4919999999999999
+      ],
+      [
+       37.109,
+       -0.4919999999999999
+      ],
+      [
+       37.109,
+       -0.4889999999999999
+      ],
+      [
+       37.106,
+       -0.4889999999999999
+      ],
+      [
+       37.106,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0268",
+    "gps_accuracy_m": 5.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.4919999999999999
+      ],
+      [
+       37.115,
+       -0.4919999999999999
+      ],
+      [
+       37.115,
+       -0.4889999999999999
+      ],
+      [
+       37.112,
+       -0.4889999999999999
+      ],
+      [
+       37.112,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0269",
+    "gps_accuracy_m": 14.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.4919999999999999
+      ],
+      [
+       37.121,
+       -0.4919999999999999
+      ],
+      [
+       37.121,
+       -0.4889999999999999
+      ],
+      [
+       37.118,
+       -0.4889999999999999
+      ],
+      [
+       37.118,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0270",
+    "gps_accuracy_m": 14.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.4919999999999999
+      ],
+      [
+       37.127,
+       -0.4919999999999999
+      ],
+      [
+       37.127,
+       -0.4889999999999999
+      ],
+      [
+       37.124,
+       -0.4889999999999999
+      ],
+      [
+       37.124,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0271",
+    "gps_accuracy_m": 14.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.4919999999999999
+      ],
+      [
+       37.133,
+       -0.4919999999999999
+      ],
+      [
+       37.133,
+       -0.4889999999999999
+      ],
+      [
+       37.13,
+       -0.4889999999999999
+      ],
+      [
+       37.13,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0272",
+    "gps_accuracy_m": 9.9,
+    "mock_location": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.4919999999999999
+      ],
+      [
+       37.139,
+       -0.4919999999999999
+      ],
+      [
+       37.139,
+       -0.4889999999999999
+      ],
+      [
+       37.136,
+       -0.4889999999999999
+      ],
+      [
+       37.136,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0273",
+    "gps_accuracy_m": 10.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.4919999999999999
+      ],
+      [
+       37.145,
+       -0.4919999999999999
+      ],
+      [
+       37.145,
+       -0.4889999999999999
+      ],
+      [
+       37.142,
+       -0.4889999999999999
+      ],
+      [
+       37.142,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0274",
+    "gps_accuracy_m": 7.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.4919999999999999
+      ],
+      [
+       37.151,
+       -0.4919999999999999
+      ],
+      [
+       37.151,
+       -0.4889999999999999
+      ],
+      [
+       37.148,
+       -0.4889999999999999
+      ],
+      [
+       37.148,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0275",
+    "gps_accuracy_m": 8.8,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.4919999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4919999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4889999999999999
+      ],
+      [
+       37.154,
+       -0.4889999999999999
+      ],
+      [
+       37.154,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0277",
+    "gps_accuracy_m": 4.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.4919999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4919999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4889999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4889999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0278",
+    "gps_accuracy_m": 12.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.4919999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4919999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4889999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4889999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4919999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0280",
+    "gps_accuracy_m": 13.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.4859999999999999
+      ],
+      [
+       37.103,
+       -0.4859999999999999
+      ],
+      [
+       37.103,
+       -0.4829999999999999
+      ],
+      [
+       37.1,
+       -0.4829999999999999
+      ],
+      [
+       37.1,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0281",
+    "gps_accuracy_m": 8.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.4859999999999999
+      ],
+      [
+       37.109,
+       -0.4859999999999999
+      ],
+      [
+       37.109,
+       -0.4829999999999999
+      ],
+      [
+       37.106,
+       -0.4829999999999999
+      ],
+      [
+       37.106,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0282",
+    "gps_accuracy_m": 12.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.4859999999999999
+      ],
+      [
+       37.115,
+       -0.4859999999999999
+      ],
+      [
+       37.115,
+       -0.4829999999999999
+      ],
+      [
+       37.112,
+       -0.4829999999999999
+      ],
+      [
+       37.112,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0283",
+    "gps_accuracy_m": 8.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.4859999999999999
+      ],
+      [
+       37.121,
+       -0.4859999999999999
+      ],
+      [
+       37.121,
+       -0.4829999999999999
+      ],
+      [
+       37.118,
+       -0.4829999999999999
+      ],
+      [
+       37.118,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0284",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.4859999999999999
+      ],
+      [
+       37.127,
+       -0.4859999999999999
+      ],
+      [
+       37.127,
+       -0.4829999999999999
+      ],
+      [
+       37.124,
+       -0.4829999999999999
+      ],
+      [
+       37.124,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0285",
+    "gps_accuracy_m": 13.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.4859999999999999
+      ],
+      [
+       37.133,
+       -0.4859999999999999
+      ],
+      [
+       37.133,
+       -0.4829999999999999
+      ],
+      [
+       37.13,
+       -0.4829999999999999
+      ],
+      [
+       37.13,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0286",
+    "gps_accuracy_m": 8.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.4859999999999999
+      ],
+      [
+       37.139,
+       -0.4859999999999999
+      ],
+      [
+       37.139,
+       -0.4829999999999999
+      ],
+      [
+       37.136,
+       -0.4829999999999999
+      ],
+      [
+       37.136,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0287",
+    "gps_accuracy_m": 6.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.4859999999999999
+      ],
+      [
+       37.145,
+       -0.4859999999999999
+      ],
+      [
+       37.145,
+       -0.4829999999999999
+      ],
+      [
+       37.142,
+       -0.4829999999999999
+      ],
+      [
+       37.142,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0288",
+    "gps_accuracy_m": 7.7,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.148,
+       -0.4859999999999999
+      ],
+      [
+       37.151,
+       -0.4859999999999999
+      ],
+      [
+       37.151,
+       -0.4829999999999999
+      ],
+      [
+       37.148,
+       -0.4829999999999999
+      ],
+      [
+       37.148,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0289",
+    "gps_accuracy_m": 5.1,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.154,
+       -0.4859999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4859999999999999
+      ],
+      [
+       37.157000000000004,
+       -0.4829999999999999
+      ],
+      [
+       37.154,
+       -0.4829999999999999
+      ],
+      [
+       37.154,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0290",
+    "gps_accuracy_m": 10.3,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.160000000000004,
+       -0.4859999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4859999999999999
+      ],
+      [
+       37.163000000000004,
+       -0.4829999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4829999999999999
+      ],
+      [
+       37.160000000000004,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0291",
+    "gps_accuracy_m": 4.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.166000000000004,
+       -0.4859999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4859999999999999
+      ],
+      [
+       37.169000000000004,
+       -0.4829999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4829999999999999
+      ],
+      [
+       37.166000000000004,
+       -0.4859999999999999
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0292",
+    "gps_accuracy_m": 9.6,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.1,
+       -0.47999999999999987
+      ],
+      [
+       37.103,
+       -0.47999999999999987
+      ],
+      [
+       37.103,
+       -0.47699999999999987
+      ],
+      [
+       37.1,
+       -0.47699999999999987
+      ],
+      [
+       37.1,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0293",
+    "gps_accuracy_m": 6.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.106,
+       -0.47999999999999987
+      ],
+      [
+       37.109,
+       -0.47999999999999987
+      ],
+      [
+       37.109,
+       -0.47699999999999987
+      ],
+      [
+       37.106,
+       -0.47699999999999987
+      ],
+      [
+       37.106,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0294",
+    "gps_accuracy_m": 11.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.112,
+       -0.47999999999999987
+      ],
+      [
+       37.115,
+       -0.47999999999999987
+      ],
+      [
+       37.115,
+       -0.47699999999999987
+      ],
+      [
+       37.112,
+       -0.47699999999999987
+      ],
+      [
+       37.112,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0295",
+    "gps_accuracy_m": 13.9,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.118,
+       -0.47999999999999987
+      ],
+      [
+       37.121,
+       -0.47999999999999987
+      ],
+      [
+       37.121,
+       -0.47699999999999987
+      ],
+      [
+       37.118,
+       -0.47699999999999987
+      ],
+      [
+       37.118,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0297",
+    "gps_accuracy_m": 5.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.124,
+       -0.47999999999999987
+      ],
+      [
+       37.127,
+       -0.47999999999999987
+      ],
+      [
+       37.127,
+       -0.47699999999999987
+      ],
+      [
+       37.124,
+       -0.47699999999999987
+      ],
+      [
+       37.124,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0298",
+    "gps_accuracy_m": 13.2,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.13,
+       -0.47999999999999987
+      ],
+      [
+       37.133,
+       -0.47999999999999987
+      ],
+      [
+       37.133,
+       -0.47699999999999987
+      ],
+      [
+       37.13,
+       -0.47699999999999987
+      ],
+      [
+       37.13,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0299",
+    "gps_accuracy_m": 12.4,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.136,
+       -0.47999999999999987
+      ],
+      [
+       37.139,
+       -0.47999999999999987
+      ],
+      [
+       37.139,
+       -0.47699999999999987
+      ],
+      [
+       37.136,
+       -0.47699999999999987
+      ],
+      [
+       37.136,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "grower_code": "KG-0300",
+    "gps_accuracy_m": 11.0,
+    "mock_location": false
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       37.142,
+       -0.47999999999999987
+      ],
+      [
+       37.145,
+       -0.47999999999999987
+      ],
+      [
+       37.145,
+       -0.47699999999999987
+      ],
+      [
+       37.142,
+       -0.47699999999999987
+      ],
+      [
+       37.142,
+       -0.47999999999999987
+      ]
+     ]
+    ]
+   }
+  }
+ ]
 }

@@ -113,12 +113,17 @@ class ConfirmRequest(BaseModel):
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest) -> ChatResponse:
     collected: list[Verdict] = []
-    mark = len(bus.recent)
+    start_seq = bus.seq            # every verdict this request publishes has seq >= this
 
     def harvest() -> list[dict[str, Any]]:
-        new = bus.recent[mark:]
-        collected.extend(v for v in new if v not in collected)
-        return [audit.as_dict(v) for v in new]
+        # Collect this request's verdicts by sequence, not by an absolute index
+        # into the (trimmed) ring buffer — the latter returned [] once the buffer
+        # filled. Accumulates across calls and dedupes, so repeated calls at the
+        # various return points stay correct.
+        for v in bus.recent:
+            if v.seq >= start_seq and v not in collected:
+                collected.append(v)
+        return [audit.as_dict(v) for v in collected]
 
     # 1 identify
     ident = await identify.identify(req.phone)

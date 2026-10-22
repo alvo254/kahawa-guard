@@ -1,12 +1,25 @@
 # Scene 3c. The records-fs server is vulnerable by design: it decides for itself
 # which paths it may read (the EscapeRoute flaw class, CVE-2025-53109 and
 # CVE-2025-53110). This policy moves the boundary underneath it, into the kernel,
-# where the server's own bugs cannot reach it: the real file open is what gets
+# where the server's own bugs cannot reach it: the REAL file open is what gets
 # judged, not the path string the server chose to validate.
 #
-# TUNE THE ALLOWLIST against the exact records-fs image. It must cover the files
-# the process legitimately needs to run (interpreter, libraries) and nothing more:
-# a missing prefix kills the server on startup, an over-broad one defeats the point.
+# Strategy: deny-list the one directory that is off-limits (/srv/records-evil/),
+# rather than allow-list everything the Python runtime needs. This is robust — it
+# never kills the server on startup or the legitimate read under /srv/records/ —
+# and it still makes the point: Tetragon's security_file_open hook sees the
+# RESOLVED path, so:
+#   - the prefix bypass /srv/records-evil/secret.txt is killed outright;
+#   - the symlink /srv/records/backdoor-link.txt — whose STRING the buggy server
+#     validated as "inside /srv/records" — resolves to /srv/records-evil/secret.txt,
+#     and the kernel judges that real target, so it is killed too.
+# The server's string check and the kernel's view of the real open disagree, and
+# the kernel wins. That is the whole lesson of Scene 3c.
+#
+# (If you want positive containment instead — "confine to /srv/records, kill
+# everything else" — switch the selector to NotPrefix and allow-list the runtime
+# paths the image needs; that is stronger but must be tuned against the exact
+# image or it kills the server on startup. The deny-list below needs no tuning.)
 apiVersion: cilium.io/v1alpha1
 kind: TracingPolicy
 metadata:
@@ -24,11 +37,8 @@ spec:
       selectors:
         - matchArgs:
             - index: 0
-              operator: "NotPrefix"       # anything NOT under an allowed prefix
+              operator: "Prefix"            # the forbidden area, judged on the REAL open
               values:
-                - "/srv/records/"
-                - "/usr/"                  # the server's own read-only runtime
-                - "/lib/"
-                - "/proc/"
+                - "/srv/records-evil/"
           matchActions:
             - action: Sigkill

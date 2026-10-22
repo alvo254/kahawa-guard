@@ -24,7 +24,20 @@ CREATE TABLE IF NOT EXISTS members (
   -- see a real number, only its hash.
   phone_e164 TEXT NOT NULL,
   coop_id INT NOT NULL,
-  payout_account_ref TEXT NOT NULL
+  payout_account_ref TEXT NOT NULL,
+  -- Member PII. All synthetic (see scripts/seedgen.py). These make the demo DB
+  -- read like a real cooperative register — and give the poisoning scenes a real
+  -- person to point at.
+  full_name TEXT,
+  national_id TEXT,
+  date_of_birth DATE,
+  sub_county TEXT,
+  village TEXT,
+  next_of_kin TEXT,
+  next_of_kin_phone TEXT,
+  joined_on DATE,
+  status TEXT DEFAULT 'active',        -- active | inactive | deceased
+  phone_changed_on DATE                -- NULL unless the number is stale
 );
 
 CREATE TABLE IF NOT EXISTS plots (
@@ -64,6 +77,74 @@ CREATE TABLE IF NOT EXISTS payments (
   amount_kes NUMERIC(12,2) NOT NULL,
   status TEXT NOT NULL,          -- pending, paid, held
   paid_at TIMESTAMPTZ
+);
+
+-- Operational back-office tables. All synthetic. Payments above are derived from
+-- deliveries, so the numbers reconcile the way a real factory system's do.
+CREATE TABLE IF NOT EXISTS deliveries (
+  id SERIAL PRIMARY KEY,
+  member_id INT REFERENCES members(id),
+  season TEXT NOT NULL,
+  delivered_on DATE NOT NULL,
+  kilos REAL NOT NULL,
+  grade TEXT,
+  factory TEXT
+);
+
+CREATE TABLE IF NOT EXISTS advances (
+  id SERIAL PRIMARY KEY,
+  member_id INT REFERENCES members(id),
+  kind TEXT NOT NULL,                       -- cash | fertiliser | pesticide
+  amount_kes NUMERIC(12,2),
+  issued_on DATE,
+  status TEXT,                              -- outstanding | repaid | written_off
+  dealer_licence TEXT REFERENCES dealers(licence_no)
+);
+
+CREATE TABLE IF NOT EXISTS grading (
+  id SERIAL PRIMARY KEY,
+  lot_ref TEXT UNIQUE NOT NULL,
+  member_id INT REFERENCES members(id),
+  season TEXT,
+  grade TEXT,                               -- AA | AB | PB | C | TT
+  cupping_score REAL,
+  outturn_pct REAL,
+  milled_on DATE
+);
+
+CREATE TABLE IF NOT EXISTS sacco (
+  member_id INT PRIMARY KEY REFERENCES members(id),
+  savings_kes NUMERIC(12,2),
+  loan_balance_kes NUMERIC(12,2),
+  loan_status TEXT,                         -- none | current | arrears
+  last_statement DATE
+);
+
+-- Corporate buyer layer: the "leak corporate PII / financials" target.
+CREATE TABLE IF NOT EXISTS buyers (
+  id SERIAL PRIMARY KEY,
+  buyer_code TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  country TEXT,
+  contact_name TEXT,
+  contact_email TEXT,
+  contact_phone TEXT,
+  bank_name TEXT,
+  bank_account TEXT,
+  settlement_swift TEXT,
+  kra_pin TEXT
+);
+
+CREATE TABLE IF NOT EXISTS contracts (
+  id SERIAL PRIMARY KEY,
+  contract_ref TEXT UNIQUE NOT NULL,
+  buyer_id INT REFERENCES buyers(id),
+  season TEXT NOT NULL,
+  kilos REAL NOT NULL,
+  price_per_kg_usd NUMERIC(8,2) NOT NULL,
+  incoterm TEXT,                            -- FOB | CIF
+  signed_at DATE,
+  status TEXT                              -- draft | signed | settled
 );
 
 CREATE TABLE IF NOT EXISTS documents (

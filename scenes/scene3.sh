@@ -7,6 +7,15 @@
 #
 #   scene3.sh           first half: the hidden instruction fires
 #   scene3.sh rugpull   second half, after `make deploy RUG_PULL=true`
+#
+# IMPORTANT — which switches for the hardened demo. This scene's control is the
+# TOOL GATE (L4). Demo it with tool_gate ON and input_guard OFF:
+#   ./scripts/admin.sh layers input_guard=off expert_guard=off provenance=off registry=off tool_gate=on budgets=off
+# If input_guard is also on, L1 (Mistral moderation) can block the benign carrier
+# message ("...my plot... I am KG-0003") as a PII false positive BEFORE the model
+# is called — so get_forecast/change_payout_account are never proposed and the
+# gate has nothing to park (seen: input_guard block pii 0.89). That is a real L1
+# over-sensitivity lesson, but it pre-empts the layer this scene is about.
 source "$(dirname "${BASH_SOURCE[0]}")/_common.sh"
 require_gateway
 

@@ -17,6 +17,8 @@ export interface Msg {
   delivery?: Delivery;
   /** present when the gateway parked an action the member can confirm */
   pendingActionId?: string | null;
+  /** present when this bubble is an attached document */
+  doc?: { title: string; role: string; trust: string };
 }
 
 let seq = 0;
@@ -36,6 +38,14 @@ export function useAssistant(phone: string) {
   // A system line in the thread — used to show e.g. an uploaded document.
   const note = useCallback((text: string) => {
     setMessages((m) => [...m, { id: mkId(), from: "system", text, at: Date.now() / 1000 }]);
+  }, []);
+
+  // An attached-document bubble (outgoing), shown before the triggering question.
+  const attach = useCallback((doc: { title: string; role: string; trust: string }) => {
+    setMessages((m) => [
+      ...m,
+      { id: mkId(), from: "member", text: doc.title, at: Date.now() / 1000, delivery: "delivered", doc },
+    ]);
   }, []);
 
   const send = useCallback(
@@ -91,7 +101,7 @@ export function useAssistant(phone: string) {
     [phone],
   );
 
-  return { messages, busy, rateLimited, send, reset, note };
+  return { messages, busy, rateLimited, send, reset, note, attach };
 }
 
 export type AssistantController = ReturnType<typeof useAssistant>;

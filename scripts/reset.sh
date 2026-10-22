@@ -20,6 +20,7 @@ PG_DB=${PG_DB:-kahawa}
 
 kubectl -n "$NAMESPACE_DATA" exec -i "$PG_POD" -- psql -v ON_ERROR_STOP=1 -U "$PG_USER" -d "$PG_DB" <<'SQL'
 TRUNCATE members, plots, forest_2020, dealers, products, payments,
+         deliveries, advances, grading, sacco, buyers, contracts,
          chunks, documents, pending_actions, audit_events RESTART IDENTITY CASCADE;
 SQL
 

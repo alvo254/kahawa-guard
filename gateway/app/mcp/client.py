@@ -118,16 +118,21 @@ class McpManager:
 
     def tool_schemas(self) -> list[dict[str, Any]]:
         """Tool schemas for the model, taken only from allowlisted, pinned,
-        reachable servers. A tool the pack refuses outright is never even
-        described to the model: the cheapest refusal is the one the model never
-        gets the chance to attempt."""
+        reachable servers. When the tool gate is ON, a tool the pack refuses
+        outright is never even described to the model: the cheapest refusal is
+        the one the model never gets the chance to attempt. When the gate is OFF
+        (the naked profile) every reachable tool is offered — including the ones
+        the pack would refuse — because naked is the profile where the attacks
+        are meant to reach the model and land. Hiding refused tools in naked too
+        was a bug: it silently defended Scenes 3b/5/6 even with every guard off."""
         schemas: list[dict[str, Any]] = []
+        gate_on = packs.on("tool_gate")
         for state in self.servers.values():
             if not state.usable:
                 continue
             for tool in state.tools:
                 rule = packs.active.tool_rule(tool["name"])
-                if rule.get("decision") == "refuse":
+                if gate_on and rule.get("decision") == "refuse":
                     continue
                 schemas.append({
                     "type": "function",

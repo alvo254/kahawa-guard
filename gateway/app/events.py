@@ -24,6 +24,7 @@ class Verdict:
     phone_hash: str = ""
     extra: dict[str, Any] = field(default_factory=dict)
     at: float = field(default_factory=time.time)
+    seq: int = 0                   # monotonic id, set by the Broadcaster on publish
 
     def sse(self) -> str:
         return f"data: {json.dumps(asdict(self))}\n\n"
@@ -38,6 +39,14 @@ class Broadcaster:
         self._subscribers: set[asyncio.Queue[Verdict]] = set()
         self._maxsize = maxsize
         self._recent: list[Verdict] = []
+        self._seq = 0
+
+    @property
+    def seq(self) -> int:
+        """The next sequence number. Snapshot it before a request, then harvest
+        every verdict whose seq is >= that snapshot — robust to the ring buffer
+        trimming, unlike an absolute index into `recent`."""
+        return self._seq
 
     def subscribe(self) -> asyncio.Queue[Verdict]:
         q: asyncio.Queue[Verdict] = asyncio.Queue(maxsize=self._maxsize)
@@ -48,6 +57,8 @@ class Broadcaster:
         self._subscribers.discard(q)
 
     def publish(self, v: Verdict) -> None:
+        v.seq = self._seq
+        self._seq += 1
         self._recent.append(v)
         del self._recent[:-200]
         for q in list(self._subscribers):
